@@ -1,11 +1,5 @@
 import { RgbaColor } from '../utils/RgbaColor'
-import {
-  BackgroundColorDef,
-  LcdColorDef,
-  ColorDef,
-  LedColorDef
-} from './color-defs'
-
+import { BackgroundColorDef, LcdColorDef, ColorDef, LedColorDef } from './color-defs'
 
 export const BackgroundColor = {
   DARK_GRAY: new BackgroundColorDef(
