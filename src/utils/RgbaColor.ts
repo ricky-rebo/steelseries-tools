@@ -14,9 +14,11 @@ export class RgbaColor {
   }
 
   static fromHexString(hexString: string, alpha = 1) {
-    const red = parseInt(hexString.substring(1, 3), 16)
-    const green = parseInt(hexString.substring(3, 5), 16)
-    const blue = parseInt(hexString.substring(5, 7), 16)
+    hexString = hexString.charAt(0) === "#" ? hexString.substring(1, 7) : hexString
+
+    const red = parseInt(hexString.substring(0, 2), 16)
+    const green = parseInt(hexString.substring(2, 4), 16)
+    const blue = parseInt(hexString.substring(4, 6), 16)
 
     return new RgbaColor(red, green, blue, alpha)
   }
@@ -53,15 +55,27 @@ export class RgbaColor {
     this.#alpha = range(a, 1)
   }
 
-  getRgbaColor () {
+  toRgbaColorString () {
     return `rgba(${this.#red}, ${this.#green}, ${this.#blue}, ${this.#alpha})`
   }
-
-  getRgbColor () {
-    return `rgb(${this.#red}, ${this.#green}, ${this.#blue})`
+  getRgbaColor () {
+    // TODO print deprecation warning
+    return this.toRgbaColorString()
   }
 
-  getHexColor () {
+  toRgbColorString () {
+    return `rgb(${this.#red}, ${this.#green}, ${this.#blue})`
+  }
+  getRgbColor () {
+    // TODO print deprecation warning
+    return this.toRgbColorString()
+  }
+
+  toHexColorString () {
     return `#${this.#red.toString(16)}${this.#green.toString(16)}${this.#blue.toString(16)}`
+  }
+  getHexColor () {
+    // TODO print deprecation warning
+    return this.toHexColorString()
   }
 }
