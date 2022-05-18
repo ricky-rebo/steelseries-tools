@@ -1,7 +1,9 @@
-import { createBuffer } from "../utils/common"
+import { createBuffer, rotateContext } from "../utils/common"
+import { HALF_PI, PI } from "../utils/constants"
 
-export function createMeasuredValueImage (size: number, indicatorColor: string, radial: boolean, vertical: boolean) {
-  const CACHE_KEY = size.toString() + indicatorColor + radial + vertical
+// TODO docs
+export function createMeasuredValueImage (size: number, indicatorColor: string, linear = false, vertical = false) {
+  const CACHE_KEY = size.toString() + indicatorColor + linear + vertical
 
   // check if we have already created and cached this buffer, if so return it and exit
   if (!(CACHE_KEY in cache)) {
@@ -12,9 +14,15 @@ export function createMeasuredValueImage (size: number, indicatorColor: string, 
       throw Error("Unable to get canvas context!")
     }
 
-    indicatorCtx.fillStyle = indicatorColor
-    indicatorCtx.fill(createIndicatorPath(size, radial, vertical))
+    if (linear && vertical) {
+      rotateContext(indicatorCtx, -HALF_PI)
+    } else if (linear) {
+      rotateContext(indicatorCtx, PI)
+    }
 
+    indicatorCtx.fillStyle = indicatorColor
+    indicatorCtx.fill(createIndicatorPath(size))
+    
     // cache the buffer
     cache[CACHE_KEY] = indicatorBuffer
   }
@@ -24,27 +32,13 @@ export function createMeasuredValueImage (size: number, indicatorColor: string, 
 const cache: { [key: string]: HTMLCanvasElement } = {}
 
 
-function createIndicatorPath(size: number, radial: boolean, vertical: boolean) {
+function createIndicatorPath(size: number) {
   const path = new Path2D()
 
-  if (radial) {
-    path.moveTo(size * 0.5, size)
-    path.lineTo(0, 0)
-    path.lineTo(size, 0)
-    path.closePath()
-  } else {
-    if (vertical) {
-      path.moveTo(size, size * 0.5)
-      path.lineTo(0, 0)
-      path.lineTo(0, size)
-      path.closePath()
-    } else {
-      path.moveTo(size * 0.5, 0)
-      path.lineTo(size, size)
-      path.lineTo(0, size)
-      path.closePath()
-    }
-  }
+  path.moveTo(size * 0.5, size)
+  path.lineTo(0, 0)
+  path.lineTo(size, 0)
+  path.closePath()
 
   return path
 }
