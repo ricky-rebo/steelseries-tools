@@ -10,3 +10,12 @@ export function createBuffer (width: number, height = width, id?: string) {
 
   return canvas
 }
+
+export function rotateContext(ctx: CanvasRenderingContext2D, angle: number) {
+  const centerX = ctx.canvas.width / 2
+  const centerY = ctx.canvas.height / 2
+
+  ctx.translate(centerX, centerY)
+  ctx.rotate(angle)
+  ctx.translate(-centerX, -centerY)
+}
