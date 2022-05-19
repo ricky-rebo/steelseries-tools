@@ -5,9 +5,10 @@ import { TWO_PI } from "../utils/constants"
 import { createLinearGradient, createRadialGradient } from "../utils/gradients"
 import { RgbaColor } from "../utils/RgbaColor"
 
-type CanvasCtx = CanvasRenderingContext2D
+const cache: Record<string, HTMLCanvasElement> = {}
 
-function drawPointerImage(ctx: CanvasCtx, size: number, ptrType: PointerTypeDef, ptrColor: ColorDef, lblColor: RgbaColor) {
+type CanvasCtx = CanvasRenderingContext2D
+export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: PointerTypeDef, ptrColor: ColorDef, lblColor: RgbaColor) {
   const CACHE_KEY = size.toString() + ptrType.type + ptrColor.light.toHexString() + ptrColor.medium.toHexString()
 
   // check if we have already created and cached this buffer, if not create it
@@ -403,7 +404,3 @@ function drawPointerImage(ctx: CanvasCtx, size: number, ptrType: PointerTypeDef,
 
   ctx.drawImage(cache[CACHE_KEY], 0, 0)
 }
-
-const cache: Record<string, HTMLCanvasElement> = {}
-
-export default drawPointerImage

@@ -4,7 +4,7 @@ import { RgbaColor } from '../utils/RgbaColor'
 
 type CanvasCtx = CanvasRenderingContext2D
 
-const drawRoseImage = function (ctx: CanvasCtx, symbolColor: RgbaColor) {
+export function drawRoseImage (ctx: CanvasCtx, symbolColor: RgbaColor) {
   const width = ctx.canvas.width
   const height = ctx.canvas.height
   const centerX = width / 2
@@ -84,5 +84,3 @@ const drawRoseImage = function (ctx: CanvasCtx, symbolColor: RgbaColor) {
 
   ctx.restore()
 }
-
-export default drawRoseImage
