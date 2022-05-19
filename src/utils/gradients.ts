@@ -1,8 +1,5 @@
 type CanvasCtx = CanvasRenderingContext2D
 
-type Point = { x: number, y: number }
-type RadialPoint = Point & { r: number }
-
 type ColorStop = { offset: number, color: string }
 
 // TODO internal docs
@@ -17,8 +14,8 @@ export function createLinearGradient(ctx: CanvasCtx, x0: number, y0: number, x1:
 }
 
 // TODO internal docs
-export function createRadialGradient (ctx: CanvasCtx, from: RadialPoint, to: RadialPoint, colorStops: ColorStop[]) {
-  const gradient = ctx.createRadialGradient(from.x, from.y, from.r, to.x, to.y, to.r)
+export function createRadialGradient (ctx: CanvasCtx, x: number, y: number, r0: number, r1: number, colorStops: ColorStop[]) {
+  const gradient = ctx.createRadialGradient(x, y, r0, x, y, r1)
 
   colorStops.forEach(({ offset, color }) => {
     gradient.addColorStop(offset, color)

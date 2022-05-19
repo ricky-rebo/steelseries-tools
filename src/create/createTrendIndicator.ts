@@ -59,16 +59,11 @@ function drawUpArrow (ctx: CanvasRenderingContext2D, width: number, height: numb
 
   let fill
   if (on) {
-    fill = createRadialGradient(
-      ctx,
-      { x: 0.5 * width, y: 0.2 * height, r: 0 },
-      { x: 0.5 * width, y: 0.2 * height, r: 0.5 * width },
-      [
-        { color: color.innerColor1_ON, offset: 0 },
-        { color: color.innerColor2_ON, offset: 0.2 },
-        { color: color.outerColor_ON, offset: 1 }
-      ]
-    )
+    fill = createRadialGradient(ctx, 0.5 * width, 0.2 * height, 0, 0.5 * width, [
+      { color: color.innerColor1_ON, offset: 0 },
+      { color: color.innerColor2_ON, offset: 0.2 },
+      { color: color.outerColor_ON, offset: 1 }
+    ])
   } else {
     fill = createLinearGradient(ctx, 0, 0, 0, 0.5 * height, [
       { color: "#323232", offset: 0 },
@@ -111,19 +106,14 @@ function drawUpArrow (ctx: CanvasRenderingContext2D, width: number, height: numb
     ctx.stroke()
   } else {
     // draw halo
-    ctx.fillStyle = createRadialGradient(
-      ctx,
-      { x: 0.5 * width, y: 0.2 * height, r: 0 },
-      { x: 0.5 * width, y: 0.2 * height, r: 0.7 * width },
-      [
-        { color: hexToRgba(color.coronaColor, 0), offset: 0 },
-        { color: hexToRgba(color.coronaColor, 0.3), offset: 0.5 },
-        { color: hexToRgba(color.coronaColor, 0.2), offset: 0.7 },
-        { color: hexToRgba(color.coronaColor, 0.1), offset: 0.8 },
-        { color: hexToRgba(color.coronaColor, 0.05), offset: 0.85 },
-        { color: hexToRgba(color.coronaColor, 0), offset: 1 },
-      ]
-    )
+    ctx.fillStyle = createRadialGradient(ctx, 0.5 * width, 0.2 * height, 0, 0.7 * width, [
+      { color: hexToRgba(color.coronaColor, 0), offset: 0 },
+      { color: hexToRgba(color.coronaColor, 0.3), offset: 0.5 },
+      { color: hexToRgba(color.coronaColor, 0.2), offset: 0.7 },
+      { color: hexToRgba(color.coronaColor, 0.1), offset: 0.8 },
+      { color: hexToRgba(color.coronaColor, 0.05), offset: 0.85 },
+      { color: hexToRgba(color.coronaColor, 0), offset: 1 },
+    ])
 
     ctx.beginPath()
     ctx.arc(0.5 * width, 0.2 * height, 0.7 * width, 0, TWO_PI, true)
@@ -194,19 +184,14 @@ function drawEquals (ctx: CanvasRenderingContext2D, width: number, height: numbe
     ctx.lineTo(0.128 * width, 0.516 * height + 0.074 * height)
     ctx.stroke()
   } else {
-    ctx.fillStyle = createRadialGradient(
-      ctx,
-      { x: 0.5 * width, y: 0.5 * height, r: 0 },
-      { x: 0.5 * width, y: 0.5 * height, r: 0.7 * width },
-      [
-        { color: hexToRgba(color.coronaColor, 0), offset: 0 },
-        { color: hexToRgba(color.coronaColor, 0.3), offset: 0.5 },
-        { color: hexToRgba(color.coronaColor, 0.2), offset: 0.7 },
-        { color: hexToRgba(color.coronaColor, 0.1), offset: 0.8 },
-        { color: hexToRgba(color.coronaColor, 0.05), offset: 0.85 },
-        { color: hexToRgba(color.coronaColor, 0), offset: 1 },
-      ]
-    )
+    ctx.fillStyle = createRadialGradient(ctx, 0.5 * width, 0.5 * height, 0, 0.7 * width, [
+      { color: hexToRgba(color.coronaColor, 0), offset: 0 },
+      { color: hexToRgba(color.coronaColor, 0.3), offset: 0.5 },
+      { color: hexToRgba(color.coronaColor, 0.2), offset: 0.7 },
+      { color: hexToRgba(color.coronaColor, 0.1), offset: 0.8 },
+      { color: hexToRgba(color.coronaColor, 0.05), offset: 0.85 },
+      { color: hexToRgba(color.coronaColor, 0), offset: 1 },
+    ])
     
     ctx.beginPath()
     ctx.arc(0.5 * width, 0.5 * height, 0.7 * width, 0, TWO_PI, true)
@@ -220,16 +205,11 @@ function drawDownArrow (ctx: CanvasRenderingContext2D, width: number, height: nu
 
     let fill
     if (on) {
-      fill = createRadialGradient(
-        ctx,
-        { x: 0.5 * width, y: 0.8 * height, r: 0 },
-        { x: 0.5 * width, y: 0.8 * height, r: 0.5 * width },
-        [
-          { color: color.innerColor1_ON, offset: 0 },
-          { color: color.innerColor2_ON, offset: 0.2 },
-          { color: color.outerColor_ON, offset: 1 }
-        ]
-      )
+      fill = createRadialGradient(ctx, 0.5 * width, 0.8 * height, 0, 0.5 * width, [
+        { color: color.innerColor1_ON, offset: 0 },
+        { color: color.innerColor2_ON, offset: 0.2 },
+        { color: color.outerColor_ON, offset: 1 }
+      ])
     } else {
       fill = createLinearGradient(ctx, 0, 0.63 * height, 0, height, [
         { color: "#323232", offset: 0 },
@@ -280,19 +260,14 @@ function drawDownArrow (ctx: CanvasRenderingContext2D, width: number, height: nu
       ctx.stroke()
     } else {
       // draw halo
-      ctx.fillStyle = createRadialGradient(
-        ctx,
-        { x: 0.5 * width, y: 0.8 * height, r: 0 },
-        { x: 0.5 * width, y: 0.8 * height, r: 0.7 * width },
-        [
-          { color: hexToRgba(color.coronaColor, 0), offset: 0 },
-          { color: hexToRgba(color.coronaColor, 0.3), offset: 0.5 },
-          { color: hexToRgba(color.coronaColor, 0.2), offset: 0.7 },
-          { color: hexToRgba(color.coronaColor, 0.1), offset: 0.8 },
-          { color: hexToRgba(color.coronaColor, 0.05), offset: 0.85 },
-          { color: hexToRgba(color.coronaColor, 0), offset: 1 },
-        ]
-      )
+      ctx.fillStyle = createRadialGradient(ctx,  0.5 * width, 0.8 * height, 0, 0.7 * width, [
+        { color: hexToRgba(color.coronaColor, 0), offset: 0 },
+        { color: hexToRgba(color.coronaColor, 0.3), offset: 0.5 },
+        { color: hexToRgba(color.coronaColor, 0.2), offset: 0.7 },
+        { color: hexToRgba(color.coronaColor, 0.1), offset: 0.8 },
+        { color: hexToRgba(color.coronaColor, 0.05), offset: 0.85 },
+        { color: hexToRgba(color.coronaColor, 0), offset: 1 },
+      ])
 
       ctx.beginPath()
       ctx.arc(0.5 * width, 0.8 * height, 0.7 * width, 0, TWO_PI, true)
