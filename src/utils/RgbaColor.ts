@@ -55,27 +55,27 @@ export class RgbaColor {
     this.#alpha = range(a, 1)
   }
 
-  toRgbaColorString () {
+  toRgbaString () {
     return `rgba(${this.#red}, ${this.#green}, ${this.#blue}, ${this.#alpha})`
   }
   getRgbaColor () {
     // TODO print deprecation warning
-    return this.toRgbaColorString()
+    return this.toRgbaString()
   }
 
-  toRgbColorString () {
+  toRgbString () {
     return `rgb(${this.#red}, ${this.#green}, ${this.#blue})`
   }
   getRgbColor () {
     // TODO print deprecation warning
-    return this.toRgbColorString()
+    return this.toRgbString()
   }
 
-  toHexColorString () {
+  toHexString () {
     return `#${this.#red.toString(16)}${this.#green.toString(16)}${this.#blue.toString(16)}`
   }
   getHexColor () {
     // TODO print deprecation warning
-    return this.toHexColorString()
+    return this.toHexString()
   }
 }
