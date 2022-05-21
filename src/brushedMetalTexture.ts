@@ -19,11 +19,53 @@ export class BrushedMetalTexture {
 
   #random (x: number, variation: number) {
     x += ((2 * Math.random() - 1) * variation) | 0
-    return x < 0 ? 0 : x > 255 ? 255 : x
+    return this.#clamp(x)
   }
 
   #clamp (val: number) {
     return range(val, 255)
+  }
+
+  #createSinValues (width: number) {
+    let sinArr: number[] = []
+
+    for (let i = 0; i < width; i++) {
+      if (this.#shine !== 0) {
+        sinArr[i] = (255 * this.#shine * Math.sin((i / width) * PI)) | 0
+      } else {
+        sinArr[i] = 0
+      }
+    }
+
+    return sinArr
+  }
+
+  #calcPixels (ctx: CanvasRenderingContext2D, width: number, height: number, alpha: number) {
+    // Create pixel arrays
+    const inPixels = ctx.createImageData(width, height)
+    // const outPixels = ctx.createImageData(width, height)
+
+    // Precreate sin() values
+    const sinArr = this.#createSinValues(width)
+
+    let indx, n = 0
+    let tr, tg, tb
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        indx = y * width * 4 + x * 4
+        tr = this.#color.getRed() + sinArr[x]
+        tg = this.#color.getGreen() + sinArr[x]
+        tb = this.#color.getBlue() + sinArr[x]
+
+        n = ((2 * Math.random() - 1) * this.#variation) | 0
+        inPixels.data[indx] = this.#monochrome ? this.#clamp(tr + n) : this.#random(tr, this.#variation)
+        inPixels.data[indx+1] = this.#monochrome ? this.#clamp(tg + n) : this.#random(tg, this.#variation)
+        inPixels.data[indx+2] = this.#monochrome ? this.#clamp(tb + n) : this.#random(tb, this.#variation)
+        inPixels.data[indx+3] = alpha
+      }
+    }
+
+    return inPixels
   }
 
   #horizontalBlur (inPix: ImageData, outPix: ImageData, width: number, height: number, radius: number, alpha: number) {
@@ -75,7 +117,6 @@ export class BrushedMetalTexture {
   }
 
   fill (startX: number, startY: number, endX: number, endY: number) {
-
     startX = Math.floor(startX)
     startY = Math.floor(startY)
     endX = Math.ceil(endX)
@@ -93,37 +134,13 @@ export class BrushedMetalTexture {
       throw Error("Unable to get canvas context")
     }
 
-    // Create pixel arrays
-    const inPixels = outCanvasContext.createImageData(width, height)
-    const outPixels = outCanvasContext.createImageData(width, height)
-
-    // Precreate sin() values
-    let sinArr = []
-    if (this.#shine !== 0) {
-      for (let i = 0; i < width; i++) {
-        sinArr[i] = (255 * this.#shine * Math.sin((i / width) * PI)) | 0
-      }
-    }
-
     const alpha = 255
-    let indx, n = 0
-    let tr, tg, tb
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        indx = y * width * 4 + x * 4
-        tr = this.#color.getRed() + (this.#shine !== 0 ? sinArr[x] : 0)
-        tg = this.#color.getGreen() + (this.#shine !== 0 ? sinArr[x] : 0)
-        tb = this.#color.getBlue() + (this.#shine !== 0 ? sinArr[x] : 0)
 
-        n = ((2 * Math.random() - 1) * this.#variation) | 0
-        inPixels.data[indx] = this.#monochrome ? this.#clamp(tr + n) : this.#random(tr, this.#variation)
-        inPixels.data[indx+1] = this.#monochrome ? this.#clamp(tg + n) : this.#random(tg, this.#variation)
-        inPixels.data[indx+2] = this.#monochrome ? this.#clamp(tb + n) : this.#random(tb, this.#variation)
-        inPixels.data[indx+3] = alpha
-      }
-    }
+    // Create pixel array
+    const inPixels = this.#calcPixels(outCanvasContext, width, height, alpha)
 
     if (this.#radius > 0) {
+      const outPixels = outCanvasContext.createImageData(width, height)
       this.#horizontalBlur(inPixels, outPixels, width, height, this.#radius, alpha)
       outCanvasContext.putImageData(outPixels, startX, startY)
     } else {
