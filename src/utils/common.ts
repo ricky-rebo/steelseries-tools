@@ -11,6 +11,20 @@ export function createBuffer (width: number, height = width, id?: string) {
   return canvas
 }
 
+type DrawFunction = (ctx: CanvasRenderingContext2D) => void
+export function drawToBuffer (width: number, height: number, drawFunction: DrawFunction) {
+  const buffer = createBuffer(width, height)
+  const ctx = buffer.getContext('2d')
+
+  if (!ctx) {
+    throw Error("Unable to get canvas context!")
+  }
+
+  drawFunction(ctx)
+
+  return buffer
+}
+
 export function rotateContext(ctx: CanvasRenderingContext2D, angle: number) {
   const centerX = ctx.canvas.width / 2
   const centerY = ctx.canvas.height / 2
