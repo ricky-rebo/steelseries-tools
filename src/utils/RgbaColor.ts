@@ -23,6 +23,12 @@ export class RgbaColor {
     return new RgbaColor(red, green, blue, alpha)
   }
 
+  static fromRawColor(rawColorData: number[]) {
+    const alpha = rawColorData.length > 3 ? rawColorData[3] : 255
+
+    return new RgbaColor(rawColorData[0], rawColorData[1], rawColorData[2], alpha)
+  }
+
   getRed () {
     return this.#red
   }
