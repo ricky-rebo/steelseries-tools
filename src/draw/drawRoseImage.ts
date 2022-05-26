@@ -1,6 +1,6 @@
 import { TWO_PI, RAD_FACTOR } from '../utils/constants'
 import { createLinearGradient } from '../utils/gradients'
-import { RgbaColor } from '../utils/RgbaColor'
+import { RgbaColor } from '../colors/RgbaColor'
 
 type CanvasCtx = CanvasRenderingContext2D
 

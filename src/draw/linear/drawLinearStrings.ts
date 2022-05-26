@@ -1,6 +1,6 @@
 import { GaugeTypeDef } from '../../customization/type-descriptors'
 import { STD_FONT_NAME } from '../../utils/constants'
-import { RgbaColor } from '../../utils/RgbaColor'
+import { RgbaColor } from '../../colors/RgbaColor'
 
 type CanvasCtx = CanvasRenderingContext2D
 

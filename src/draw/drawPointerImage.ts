@@ -3,7 +3,7 @@ import { PointerTypeDef } from "../customization/type-descriptors"
 import { createBuffer } from "../utils/common"
 import { TWO_PI } from "../utils/constants"
 import { createLinearGradient, createRadialGradient } from "../utils/gradients"
-import { RgbaColor } from "../utils/RgbaColor"
+import { RgbaColor } from "../colors/RgbaColor"
 
 const cache: Record<string, HTMLCanvasElement> = {}
 

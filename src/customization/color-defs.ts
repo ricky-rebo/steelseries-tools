@@ -1,4 +1,4 @@
-import { RgbaColor } from "../utils/RgbaColor"
+import { RgbaColor } from "../colors/RgbaColor"
 
 export class BackgroundColorDef {
   gradientStart: RgbaColor

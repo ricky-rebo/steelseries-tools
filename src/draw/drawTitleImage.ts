@@ -1,5 +1,5 @@
 import { STD_FONT_NAME } from '../utils/constants'
-import { RgbaColor } from '../utils/RgbaColor'
+import { RgbaColor } from '../colors/RgbaColor'
 
 // TODO docs
 export function drawStrings (ctx: CanvasRenderingContext2D, title: string, unit: string, labelColor: RgbaColor) {

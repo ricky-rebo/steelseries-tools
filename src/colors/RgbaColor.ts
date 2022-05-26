@@ -1,4 +1,4 @@
-import { range } from "./common"
+import { range } from "../utils/common"
 
 export class RgbaColor {
   #red

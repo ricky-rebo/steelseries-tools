@@ -1,6 +1,6 @@
-import { getRawColorFromFraction } from "./colors"
-import { drawToBuffer } from "./common"
-import { PI, TWO_PI } from "./constants"
+import { getRawColorFromFraction } from "./misc"
+import { drawToBuffer } from "../utils/common"
+import { PI, TWO_PI } from "../utils/constants"
 import { RgbaColor } from "./RgbaColor"
 
 export class ConicalGradient {
