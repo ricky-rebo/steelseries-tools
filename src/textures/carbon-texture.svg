@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="12" height="12">
+  <defs>
+    <linearGradient id="RZZqTVxlLnEO" x1="0px" x2="0px" y1="0px" y2="6px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="rgb(35, 35, 35)"/><stop offset="1" stop-color="rgb(23, 23, 23)"/></linearGradient>
+    <linearGradient id="zMvcbvPigeDD" x1="0px" x2="0px" y1="0px" y2="4.999992px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="rgb(38, 38, 38)"/><stop offset="1" stop-color="rgb(30, 30, 30)"/></linearGradient>
+    <linearGradient id="DveNsltbdlNn" x1="0px" x2="0px" y1="6px" y2="12px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="rgb(35, 35, 35)"/><stop offset="1" stop-color="rgb(23, 23, 23)"/></linearGradient>
+    <linearGradient id="DHvuaNgwWQRy" x1="0px" x2="0px" y1="6px" y2="10.999991999999999px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="rgb(38, 38, 38)"/><stop offset="1" stop-color="rgb(30, 30, 30)"/></linearGradient>
+    <linearGradient id="bqMFuwIOIvIi" x1="0px" x2="0px" y1="0px" y2="6px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#303030"/><stop offset="1" stop-color="rgb(40, 40, 40)"/></linearGradient>
+    <linearGradient id="hfiGULCmaJzf" x1="0px" x2="0px" y1="0.9999960000000001px" y2="5.999988px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="rgb(53, 53, 53)"/><stop offset="1" stop-color="rgb(45, 45, 45)"/></linearGradient>
+    <linearGradient id="HeONAtoATNaA" x1="0px" x2="0px" y1="6px" y2="12px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#303030"/><stop offset="1" stop-color="#282828"/></linearGradient>
+    <linearGradient id="RLncfGlZREOX" x1="0px" x2="0px" y1="6.999995999999999px" y2="11.999987999999998px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#353535"/><stop offset="1" stop-color="#2d2d2d"/></linearGradient>
+  </defs>
+  <g>
+    <rect fill="url(#RZZqTVxlLnEO)" stroke="none" x="0" y="0" width="6" height="6"/>
+    <rect fill="url(#zMvcbvPigeDD)" stroke="none" x="0.9999960000000001" y="0" width="3.999996" height="4.999992"/>
+    <rect fill="url(#DveNsltbdlNn)" stroke="none" x="6" y="6" width="6" height="6"/>
+    <rect fill="url(#DHvuaNgwWQRy)" stroke="none" x="6.999995999999999" y="6" width="3.999996" height="4.999992"/>
+    <rect fill="url(#bqMFuwIOIvIi)" stroke="none" x="6" y="0" width="6" height="6"/>
+    <rect fill="url(#hfiGULCmaJzf)" stroke="none" x="6.999995999999999" y="0.9999960000000001" width="3.999996" height="4.999992"/>
+    <rect fill="url(#HeONAtoATNaA)" stroke="none" x="0" y="6" width="6" height="6"/>
+    <rect fill="url(#RLncfGlZREOX)" stroke="none" x="0.9999960000000001" y="6.999995999999999" width="3.999996" height="4.999992"/>
+  </g>
+</svg>

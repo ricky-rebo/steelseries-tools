@@ -1,0 +1,21 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15" height="15">
+  <defs>
+    <linearGradient id="kyMQeaJzozcV" x1="0px" x2="0px" y1="0.99999px" y2="6.99999px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#000000"/><stop offset="1" stop-color="#444444"/></linearGradient>
+    <linearGradient id="TsAVcstksUsC" x1="0px" x2="0px" y1="7.999994999999999px" y2="13.999995px" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#000000"/><stop offset="1" stop-color="#444444"/></linearGradient>
+  </defs>
+  <g>
+    <rect fill="#1D2123" stroke="none" x="0" y="0" width="15" height="15"/>
+    <g>
+      <path fill="url(#kyMQeaJzozcV)" stroke="none" paint-order="stroke fill markers" d=" M 0 3.9999900000000004 C 0 6 0.99999 6.99999 3 6.99999 C 4.999995 6.99999 6 6 6 3.9999900000000004 C 6 1.9999950000000002 4.999995 0.99999 3 0.99999 C 0.99999 0.99999 0 1.9999950000000002 0 3.9999900000000004 Z"/>
+      <g>
+        <path fill="#050506" stroke="none" paint-order="stroke fill markers" d=" M 0 3 C 0 4.999995 0.99999 6 3 6 C 4.999995 6 6 4.999995 6 3 C 6 0.99999 4.999995 0 3 0 C 0.99999 0 0 0.99999 0 3 Z"/>
+        <g>
+          <path fill="url(#TsAVcstksUsC)" stroke="none" paint-order="stroke fill markers" d=" M 6.99999 10.999995 C 6.99999 12.99999 7.999994999999999 13.999995 9.99999 13.999995 C 12 13.999995 12.99999 12.99999 12.99999 10.999995 C 12.99999 9 12 7.999994999999999 9.99999 7.999994999999999 C 7.999994999999999 7.999994999999999 6.99999 9 6.99999 10.999995 Z"/>
+          <g>
+            <path fill="#050506" stroke="none" paint-order="stroke fill markers" d=" M 6.99999 9.99999 C 6.99999 12 7.999994999999999 12.99999 9.99999 12.99999 C 12 12.99999 12.99999 12 12.99999 9.99999 C 12.99999 7.999994999999999 12 6.99999 9.99999 6.99999 C 7.999994999999999 6.99999 6.99999 7.999994999999999 6.99999 9.99999 Z"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
