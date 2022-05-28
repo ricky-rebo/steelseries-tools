@@ -25,9 +25,9 @@ export function drawToBuffer (width: number, height: number, drawFunction: DrawF
   return buffer
 }
 
-export function rotateContext(ctx: CanvasRenderingContext2D, angle: number) {
-  const centerX = ctx.canvas.width / 2
-  const centerY = ctx.canvas.height / 2
+export function rotateContext (ctx: CanvasRenderingContext2D, angle: number, centerX = ctx.canvas.width/2, centerY = ctx.canvas.height/2) {
+  // const centerX = ctx.canvas.width / 2
+  // const centerY = ctx.canvas.height / 2
 
   ctx.translate(centerX, centerY)
   ctx.rotate(angle)
