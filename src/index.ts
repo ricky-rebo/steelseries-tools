@@ -4,3 +4,6 @@ export const sum = (a: number, b: number) => {
   }
   return a + b;
 }
+
+export { drawFrame } from "./draw/drawFrame";
+export { FrameDesign } from "./customization/types";
