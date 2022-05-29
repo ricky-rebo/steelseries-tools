@@ -1,10 +1,10 @@
 import { range } from "../utils/common"
 
 export class RgbaColor {
-  #red
-  #green
-  #blue
-  #alpha
+  #red: number
+  #green: number
+  #blue: number
+  #alpha: number
 
   constructor (r: number, g: number, b: number, a = 1) {
     this.#red = range(r, 255)
