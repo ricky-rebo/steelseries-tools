@@ -1,6 +1,6 @@
 import { KnobTypeDef, KnobStyleDef } from '../customization/type-descriptors'
 import { createBuffer } from '../utils/common'
-import { drawMetalKnob, drawStandardKnob } from '../draw/knob'
+import { drawMetalKnobImage, drawStandardKnobImage } from '../draw/knob'
 
 // TODO docs
 export function createKnobImage (size: number, knobType: KnobTypeDef, knobStyle: KnobStyleDef) {
@@ -17,11 +17,11 @@ export function createKnobImage (size: number, knobType: KnobTypeDef, knobStyle:
 
     switch (knobType.type) {
       case 'metalKnob':
-        drawMetalKnob(knobCtx, size, knobStyle)
+        drawMetalKnobImage(knobCtx, size, knobStyle)
         break
 
       case 'standardKnob':
-        drawStandardKnob(knobCtx, size, knobStyle)
+        drawStandardKnobImage(knobCtx, size, knobStyle)
         break
     }
 
