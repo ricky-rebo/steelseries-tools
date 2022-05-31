@@ -1,27 +1,33 @@
 {
+  "name": "steelseries-tools",
+  "author": "Riccardo Rebottini",
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "dist/steelseries-tools.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
+  "peerDependencies": {
+    "react": ">=16"
+  },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "start": "dts watch",
+    "build": "dts build",
+    "test": "dts test",
+    "lint": "dts lint",
+    "prepare": "dts build",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "dts lint"
     }
   },
   "prettier": {
@@ -32,9 +38,6 @@
     "endOfLine": "auto",
     "bracketSpacing": true
   },
-  "name": "steelseries-tools",
-  "author": "Riccardo Rebottini",
-  "module": "dist/steelseries-tools.esm.js",
   "size-limit": [
     {
       "path": "dist/steelseries-tools.cjs.production.min.js",
@@ -47,10 +50,16 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
+    "@tsconfig/create-react-app": "^1.0.2",
+    "@tsconfig/recommended": "^1.0.1",
+    "@types/react": "^18.0.10",
+    "@types/react-dom": "^18.0.5",
+    "dts-cli": "^1.5.1",
     "husky": "^8.0.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "size-limit": "^7.0.8",
-    "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
-    "typescript": "^3.9.10"
+    "typescript": "^4.7.2"
   }
 }
