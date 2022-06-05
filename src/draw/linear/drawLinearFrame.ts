@@ -1,17 +1,12 @@
 import {
-  rgbaColor,
-  ConicalGradient,
   roundedRectangle,
   createBuffer
-} from '../../../utils/common'
+} from '../../utils/common'
+import { RgbaColor as rgbaColor } from '../../colors/RgbaColor'
+import { ConicalGradient } from '../../colors/ConicalGradient'
+import { FrameDesignDef } from '../../customization/type-descriptors'
 
-const drawLinearFrameImage = function (
-  ctx,
-  frameDesign,
-  imageWidth,
-  imageHeight,
-  vertical
-) {
+const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, width: number, height: number, vertical: boolean) {
   let frameWidth
   let linFBuffer
   let linFCtx
@@ -21,38 +16,36 @@ const drawLinearFrameImage = function (
   let grad
   let fractions = []
   let colors = []
-  const cacheKey =
-    imageWidth.toString() + imageHeight + frameDesign.design + vertical
+  const CACHE_KEY = width.toString() + height + frame.design + vertical
 
   // check if we have already created and cached this buffer, if not create it
-  if (!drawLinearFrameImage.cache[cacheKey]) {
-    frameWidth =
-      Math.sqrt(imageWidth * imageWidth + imageHeight * imageHeight) * 0.04
+  if (!(CACHE_KEY in cache)) {
+    frameWidth = Math.sqrt(width * width + height * height) * 0.04
     frameWidth = Math.ceil(
-      Math.min(frameWidth, (vertical ? imageWidth : imageHeight) * 0.1)
+      Math.min(frameWidth, (vertical ? width : height) * 0.1)
     )
 
     // Setup buffer
-    linFBuffer = createBuffer(imageWidth, imageHeight)
+    linFBuffer = createBuffer(width, height)
     linFCtx = linFBuffer.getContext('2d')
 
     // Calculate corner radii
     if (vertical) {
-      OUTER_FRAME_CORNER_RADIUS = Math.ceil(imageWidth * 0.05)
+      OUTER_FRAME_CORNER_RADIUS = Math.ceil(width * 0.05)
       FRAME_MAIN_CORNER_RADIUS = OUTER_FRAME_CORNER_RADIUS - 1
-      SUBTRACT_CORNER_RADIUS = Math.floor(imageWidth * 0.028571)
+      SUBTRACT_CORNER_RADIUS = Math.floor(width * 0.028571)
     } else {
-      OUTER_FRAME_CORNER_RADIUS = Math.ceil(imageHeight * 0.05)
+      OUTER_FRAME_CORNER_RADIUS = Math.ceil(height * 0.05)
       FRAME_MAIN_CORNER_RADIUS = OUTER_FRAME_CORNER_RADIUS - 1
-      SUBTRACT_CORNER_RADIUS = Math.floor(imageHeight * 0.028571)
+      SUBTRACT_CORNER_RADIUS = Math.floor(height * 0.028571)
     }
 
     roundedRectangle(
       linFCtx,
       0,
       0,
-      imageWidth,
-      imageHeight,
+      width,
+      height,
       OUTER_FRAME_CORNER_RADIUS
     )
     linFCtx.fillStyle = '#838383'
@@ -62,19 +55,19 @@ const drawLinearFrameImage = function (
       linFCtx,
       1,
       1,
-      imageWidth - 2,
-      imageHeight - 2,
+      width - 2,
+      height - 2,
       FRAME_MAIN_CORNER_RADIUS
     )
 
     // main gradient frame
-    switch (frameDesign.design) {
+    switch (frame.design) {
       case 'metal':
         grad = linFCtx.createLinearGradient(
           0,
-          imageWidth * 0.004672,
+          width * 0.004672,
           0,
-          imageHeight * 0.990654
+          height * 0.990654
         )
         grad.addColorStop(0, '#fefefe')
         grad.addColorStop(0.07, 'rgb(210, 210, 210)')
@@ -87,9 +80,9 @@ const drawLinearFrameImage = function (
       case 'brass':
         grad = linFCtx.createLinearGradient(
           0,
-          imageWidth * 0.004672,
+          width * 0.004672,
           0,
-          imageHeight * 0.990654
+          height * 0.990654
         )
         grad.addColorStop(0, 'rgb(249, 243, 155)')
         grad.addColorStop(0.05, 'rgb(246, 226, 101)')
@@ -105,9 +98,9 @@ const drawLinearFrameImage = function (
       case 'steel':
         grad = linFCtx.createLinearGradient(
           0,
-          imageWidth * 0.004672,
+          width * 0.004672,
           0,
-          imageHeight * 0.990654
+          height * 0.990654
         )
         grad.addColorStop(0, 'rgb(231, 237, 237)')
         grad.addColorStop(0.05, 'rgb(189, 199, 198)')
@@ -123,9 +116,9 @@ const drawLinearFrameImage = function (
       case 'gold':
         grad = linFCtx.createLinearGradient(
           0,
-          imageWidth * 0.004672,
+          width * 0.004672,
           0,
-          imageHeight * 0.990654
+          height * 0.990654
         )
         grad.addColorStop(0, 'rgb(255, 255, 207)')
         grad.addColorStop(0.15, 'rgb(255, 237, 96)')
@@ -145,9 +138,9 @@ const drawLinearFrameImage = function (
       case 'anthracite':
         grad = linFCtx.createLinearGradient(
           0,
-          0.004672 * imageHeight,
+          0.004672 * height,
           0,
-          0.995326 * imageHeight
+          0.995326 * height
         )
         grad.addColorStop(0, 'rgb(118, 117, 135)')
         grad.addColorStop(0.06, 'rgb(74, 74, 82)')
@@ -159,10 +152,10 @@ const drawLinearFrameImage = function (
 
       case 'tiltedGray':
         grad = linFCtx.createLinearGradient(
-          0.233644 * imageWidth,
-          0.084112 * imageHeight,
-          0.81258 * imageWidth,
-          0.910919 * imageHeight
+          0.233644 * width,
+          0.084112 * height,
+          0.81258 * width,
+          0.910919 * height
         )
         grad.addColorStop(0, '#ffffff')
         grad.addColorStop(0.07, 'rgb(210, 210, 210)')
@@ -177,10 +170,10 @@ const drawLinearFrameImage = function (
 
       case 'tiltedBlack':
         grad = linFCtx.createLinearGradient(
-          0.228971 * imageWidth,
-          0.079439 * imageHeight,
-          0.802547 * imageWidth,
-          0.898591 * imageHeight
+          0.228971 * width,
+          0.079439 * height,
+          0.802547 * width,
+          0.898591 * height
         )
         grad.addColorStop(0, '#666666')
         grad.addColorStop(0.21, '#000000')
@@ -196,12 +189,12 @@ const drawLinearFrameImage = function (
           linFCtx,
           1,
           1,
-          imageWidth - 2,
-          imageHeight - 2,
+          width - 2,
+          height - 2,
           OUTER_FRAME_CORNER_RADIUS
         )
         linFCtx.clip()
-        grad = linFCtx.createLinearGradient(0, 1, 0, imageHeight - 2)
+        grad = linFCtx.createLinearGradient(0, 1, 0, height - 2)
         // The fractions from the Java version of linear gauge
         /*
                     grad.addColorStop(0, 'rgb(249, 249, 249)');
@@ -225,8 +218,8 @@ const drawLinearFrameImage = function (
           linFCtx,
           frameWidth - 2,
           frameWidth - 2,
-          imageWidth - (frameWidth - 2) * 2,
-          imageHeight - (frameWidth - 2) * 2,
+          width - (frameWidth - 2) * 2,
+          height - (frameWidth - 2) * 2,
           SUBTRACT_CORNER_RADIUS
         )
         linFCtx.clip()
@@ -238,8 +231,8 @@ const drawLinearFrameImage = function (
           linFCtx,
           frameWidth - 1,
           frameWidth - 1,
-          imageWidth - (frameWidth - 1) * 2,
-          imageHeight - (frameWidth - 1) * 2,
+          width - (frameWidth - 1) * 2,
+          height - (frameWidth - 1) * 2,
           SUBTRACT_CORNER_RADIUS
         )
         linFCtx.clip()
@@ -265,8 +258,8 @@ const drawLinearFrameImage = function (
           linFCtx,
           1,
           1,
-          imageWidth - 2,
-          imageHeight - 2,
+          width - 2,
+          height - 2,
           OUTER_FRAME_CORNER_RADIUS
         )
         linFCtx.closePath()
@@ -274,10 +267,10 @@ const drawLinearFrameImage = function (
         grad = new ConicalGradient(fractions, colors)
         grad.fillRect(
           linFCtx,
-          imageWidth / 2,
-          imageHeight / 2,
-          imageWidth,
-          imageHeight,
+          width / 2,
+          height / 2,
+          width,
+          height,
           frameWidth,
           frameWidth
         )
@@ -303,8 +296,8 @@ const drawLinearFrameImage = function (
           linFCtx,
           1,
           1,
-          imageWidth - 2,
-          imageHeight - 2,
+          width - 2,
+          height - 2,
           OUTER_FRAME_CORNER_RADIUS
         )
         linFCtx.closePath()
@@ -312,10 +305,10 @@ const drawLinearFrameImage = function (
         grad = new ConicalGradient(fractions, colors)
         grad.fillRect(
           linFCtx,
-          imageWidth / 2,
-          imageHeight / 2,
-          imageWidth,
-          imageHeight,
+          width / 2,
+          height / 2,
+          width,
+          height,
           frameWidth,
           frameWidth
         )
@@ -367,8 +360,8 @@ const drawLinearFrameImage = function (
           linFCtx,
           1,
           1,
-          imageWidth - 2,
-          imageHeight - 2,
+          width - 2,
+          height - 2,
           OUTER_FRAME_CORNER_RADIUS
         )
         linFCtx.closePath()
@@ -376,10 +369,10 @@ const drawLinearFrameImage = function (
         grad = new ConicalGradient(fractions, colors)
         grad.fillRect(
           linFCtx,
-          imageWidth / 2,
-          imageHeight / 2,
-          imageWidth,
-          imageHeight,
+          width / 2,
+          height / 2,
+          width,
+          height,
           frameWidth,
           frameWidth
         )
@@ -390,8 +383,8 @@ const drawLinearFrameImage = function (
       linFCtx,
       frameWidth,
       frameWidth,
-      imageWidth - frameWidth * 2,
-      imageHeight - frameWidth * 2,
+      width - frameWidth * 2,
+      height - frameWidth * 2,
       SUBTRACT_CORNER_RADIUS
     )
     linFCtx.fillStyle = 'rgb(192, 192, 192)'
@@ -402,18 +395,18 @@ const drawLinearFrameImage = function (
       linFCtx,
       frameWidth,
       frameWidth,
-      imageWidth - frameWidth * 2,
-      imageHeight - frameWidth * 2,
+      width - frameWidth * 2,
+      height - frameWidth * 2,
       SUBTRACT_CORNER_RADIUS
     )
     linFCtx.fill()
 
     // cache the buffer
-    drawLinearFrameImage.cache[cacheKey] = linFBuffer
+    drawLinearFrameImage.cache[CACHE_KEY] = linFBuffer
   }
-  ctx.drawImage(drawLinearFrameImage.cache[cacheKey], 0, 0)
-  return this
+
+  ctx.drawImage(cache[CACHE_KEY], 0, 0)
 }
-drawLinearFrameImage.cache = {}
+const cache: CanvasCache = {}
 
 export default drawLinearFrameImage
