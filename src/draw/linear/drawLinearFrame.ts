@@ -147,39 +147,39 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
 
         grad = linFCtx.createLinearGradient(0, 1, 0, height - 2)
         // Modified fractions from the radial gauge - looks better imho
-        grad.addColorStop(0, 'rgb(249, 249, 249)')
-        grad.addColorStop(0.2, 'rgb(200, 195, 191)')
-        grad.addColorStop(0.3, '#ffffff')
-        grad.addColorStop(0.6, 'rgb(29, 29, 29)')
-        grad.addColorStop(0.8, 'rgb(200, 194, 192)')
-        grad.addColorStop(1, 'rgb(209, 209, 209)')
+        grad.addColorStop(0, "rgb(249, 249, 249)")
+        grad.addColorStop(0.2, "rgb(200, 195, 191)")
+        grad.addColorStop(0.3, "#ffffff")
+        grad.addColorStop(0.6, "rgb(29, 29, 29)")
+        grad.addColorStop(0.8, "rgb(200, 194, 192)")
+        grad.addColorStop(1, "rgb(209, 209, 209)")
         linFCtx.fillStyle = grad
         linFCtx.fill()
 
         // Inner frame bright
         drawRoundedRectangle(linFCtx, frameWidth-2, frameWidth-2, width - (frameWidth-2)*2, height - (frameWidth-2) * 2, innerCornerRadius)
         linFCtx.clip()
-        linFCtx.fillStyle = '#f6f6f6'
+        linFCtx.fillStyle = "#f6f6f6"
         linFCtx.fill()
 
         // Inner frame dark
         drawRoundedRectangle(linFCtx, frameWidth-1, frameWidth-1, width - (frameWidth-1) * 2, height - (frameWidth-1) * 2, innerCornerRadius)
         linFCtx.clip()
-        linFCtx.fillStyle = '#333333'
+        linFCtx.fillStyle = "#333333"
         //                linFCtx.fill();
         break
 
-      case 'blackMetal':
+      case "blackMetal":
         fractions = [0, 0.125, 0.347222, 0.5, 0.680555, 0.875, 1]
 
         colors = [
-          new rgbaColor('#FFFFFF'),
-          new rgbaColor('#000000'),
-          new rgbaColor('#999999'),
-          new rgbaColor('#000000'),
-          new rgbaColor('#999999'),
-          new rgbaColor('#000000'),
-          new rgbaColor('#FFFFFF')
+          new rgbaColor("#FFFFFF"),
+          new rgbaColor("#000000"),
+          new rgbaColor("#999999"),
+          new rgbaColor("#000000"),
+          new rgbaColor("#999999"),
+          new rgbaColor("#000000"),
+          new rgbaColor("#FFFFFF"),
         ]
 
         // Set the clip
@@ -192,19 +192,19 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
         grad.fillRect(linFCtx, width/2, height/2, width, height, frameWidth, frameWidth)
         break
 
-      case 'shinyMetal':
+      case "shinyMetal":
         fractions = [0, 0.125, 0.25, 0.347222, 0.5, 0.652777, 0.75, 0.875, 1]
 
         colors = [
-          new rgbaColor('#FFFFFF'),
-          new rgbaColor('#D2D2D2'),
-          new rgbaColor('#B3B3B3'),
-          new rgbaColor('#EEEEEE'),
-          new rgbaColor('#A0A0A0'),
-          new rgbaColor('#EEEEEE'),
-          new rgbaColor('#B3B3B3'),
-          new rgbaColor('#D2D2D2'),
-          new rgbaColor('#FFFFFF')
+          new rgbaColor("#FFFFFF"),
+          new rgbaColor("#D2D2D2"),
+          new rgbaColor("#B3B3B3"),
+          new rgbaColor("#EEEEEE"),
+          new rgbaColor("#A0A0A0"),
+          new rgbaColor("#EEEEEE"),
+          new rgbaColor("#B3B3B3"),
+          new rgbaColor("#D2D2D2"),
+          new rgbaColor("#FFFFFF"),
         ]
         
         // Set the clip
@@ -217,45 +217,27 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
         grad.fillRect(linFCtx, width / 2, height / 2, width, height, frameWidth, frameWidth)
         break
 
-      case 'chrome':
-        fractions = [
-          0,
-          0.09,
-          0.12,
-          0.16,
-          0.25,
-          0.29,
-          0.33,
-          0.38,
-          0.48,
-          0.52,
-          0.63,
-          0.68,
-          0.8,
-          0.83,
-          0.87,
-          0.97,
-          1
-        ]
+      case "chrome":
+        fractions = [0, 0.09, 0.12, 0.16, 0.25, 0.29, 0.33, 0.38, 0.48, 0.52, 0.63, 0.68, 0.8, 0.83, 0.87, 0.97, 1]
 
         colors = [
-          new rgbaColor('#FFFFFF'),
-          new rgbaColor('#FFFFFF'),
-          new rgbaColor('#888890'),
-          new rgbaColor('#A4B9BE'),
-          new rgbaColor('#9EB3B6'),
-          new rgbaColor('#707070'),
-          new rgbaColor('#DDE3E3'),
-          new rgbaColor('#9BB0B3'),
-          new rgbaColor('#9CB0B1'),
-          new rgbaColor('#FEFFFF'),
-          new rgbaColor('#FFFFFF'),
-          new rgbaColor('#9CB4B4'),
-          new rgbaColor('#C6D1D3'),
-          new rgbaColor('#F6F8F7'),
-          new rgbaColor('#CCD8D8'),
-          new rgbaColor('#A4BCBE'),
-          new rgbaColor('#FFFFFF')
+          new rgbaColor("#FFFFFF"),
+          new rgbaColor("#FFFFFF"),
+          new rgbaColor("#888890"),
+          new rgbaColor("#A4B9BE"),
+          new rgbaColor("#9EB3B6"),
+          new rgbaColor("#707070"),
+          new rgbaColor("#DDE3E3"),
+          new rgbaColor("#9BB0B3"),
+          new rgbaColor("#9CB0B1"),
+          new rgbaColor("#FEFFFF"),
+          new rgbaColor("#FFFFFF"),
+          new rgbaColor("#9CB4B4"),
+          new rgbaColor("#C6D1D3"),
+          new rgbaColor("#F6F8F7"),
+          new rgbaColor("#CCD8D8"),
+          new rgbaColor("#A4BCBE"),
+          new rgbaColor("#FFFFFF"),
         ]
         // Set the clip
         linFCtx.beginPath()
