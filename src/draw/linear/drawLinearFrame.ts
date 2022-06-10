@@ -1,10 +1,12 @@
-import { RgbaColor as rgbaColor } from '../../colors/RgbaColor'
+import { RgbaColor } from '../../colors/RgbaColor'
 import { ConicalGradient } from '../../colors/ConicalGradient'
 import { FrameDesignDef } from '../../customization/type-descriptors'
 import { createBuffer, drawRoundedRectangle } from '../../utils/common'
 import { createLinearGradient } from '../../utils/gradients'
 
-const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, width: number, height: number, vertical: boolean) {
+const cache: CanvasCache = {}
+
+export const drawLinearFrame = function (ctx: CanvasCtx, frame: FrameDesignDef, width: number, height: number, vertical: boolean) {
   const CACHE_KEY = width.toString() + height + frame.design + vertical
   
   let grad
@@ -34,8 +36,8 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
     const mainCornerRadius = outerCornerRadius - 1
 
     // Outer Border
-    drawRoundedRectangle(linFCtx, 0, 0, width, height, outerCornerRadius)
     linFCtx.fillStyle = '#838383'
+    drawRoundedRectangle(linFCtx, 0, 0, width, height, outerCornerRadius)
     linFCtx.fill()
 
     // Main Gradient
@@ -79,18 +81,6 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
         break
 
       case 'gold':
-        grad = linFCtx.createLinearGradient(0, width * 0.004672, 0, height * 0.990654)
-        grad.addColorStop(0, 'rgb(255, 255, 207)')
-        grad.addColorStop(0.15, 'rgb(255, 237, 96)')
-        grad.addColorStop(0.22, 'rgb(254, 199, 57)')
-        grad.addColorStop(0.3, 'rgb(255, 249, 203)')
-        grad.addColorStop(0.38, 'rgb(255, 199, 64)')
-        grad.addColorStop(0.44, 'rgb(252, 194, 60)')
-        grad.addColorStop(0.51, 'rgb(255, 204, 59)')
-        grad.addColorStop(0.6, 'rgb(213, 134, 29)')
-        grad.addColorStop(0.68, 'rgb(255, 201, 56)')
-        grad.addColorStop(0.75, 'rgb(212, 135, 29)')
-        grad.addColorStop(1, 'rgb(247, 238, 101)')
         linFCtx.fillStyle = createLinearGradient(linFCtx, 0, width * 0.004672, 0, height * 0.990654, [
           { color: '#ffffcf', offset: 0 },
           { color: '#ffed60', offset: 0.15 },
@@ -131,13 +121,13 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
         break
 
       case 'tiltedBlack':
-        grad = linFCtx.createLinearGradient(0.228971 * width, 0.079439 * height, 0.802547 * width, 0.898591 * height)
-        grad.addColorStop(0, '#666666')
-        grad.addColorStop(0.21, '#000000')
-        grad.addColorStop(0.47, '#666666')
-        grad.addColorStop(0.99, '#000000')
-        grad.addColorStop(1, '#000000')
-        linFCtx.fillStyle = grad
+        linFCtx.fillStyle = createLinearGradient(linFCtx, 0.228971 * width, 0.079439 * height, 0.802547 * width, 0.898591 * height, [
+          { color: '#666666', offset: 0 },
+          { color: '#000000', offset: 0.21 },
+          { color: '#666666', offset: 0.47 },
+          { color: '#000000', offset: 0.99 },
+          { color: '#000000', offset: 1 },
+        ])
         linFCtx.fill()
         break
 
@@ -145,15 +135,15 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
         drawRoundedRectangle(linFCtx, 1, 1, width - 2, height - 2, outerCornerRadius)
         linFCtx.clip()
 
-        grad = linFCtx.createLinearGradient(0, 1, 0, height - 2)
         // Modified fractions from the radial gauge - looks better imho
-        grad.addColorStop(0, "rgb(249, 249, 249)")
-        grad.addColorStop(0.2, "rgb(200, 195, 191)")
-        grad.addColorStop(0.3, "#ffffff")
-        grad.addColorStop(0.6, "rgb(29, 29, 29)")
-        grad.addColorStop(0.8, "rgb(200, 194, 192)")
-        grad.addColorStop(1, "rgb(209, 209, 209)")
-        linFCtx.fillStyle = grad
+        linFCtx.fillStyle = createLinearGradient(linFCtx, 0, 1, 0, height - 2, [
+          { color: '#f9f9f9', offset: 0 },
+          { color: '#c8c3bf', offset: 0.2 },
+          { color: '#ffffff', offset: 0.3 },
+          { color: '#1d1d1d', offset: 0.6 },
+          { color: '#c8c2c0', offset: 0.8 },
+          { color: '#d1d1d1', offset: 1 }
+        ])
         linFCtx.fill()
 
         // Inner frame bright
@@ -173,13 +163,13 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
         fractions = [0, 0.125, 0.347222, 0.5, 0.680555, 0.875, 1]
 
         colors = [
-          new rgbaColor("#FFFFFF"),
-          new rgbaColor("#000000"),
-          new rgbaColor("#999999"),
-          new rgbaColor("#000000"),
-          new rgbaColor("#999999"),
-          new rgbaColor("#000000"),
-          new rgbaColor("#FFFFFF"),
+          RgbaColor.fromHexString("#FFFFFF"),
+          RgbaColor.fromHexString("#000000"),
+          RgbaColor.fromHexString("#999999"),
+          RgbaColor.fromHexString("#000000"),
+          RgbaColor.fromHexString("#999999"),
+          RgbaColor.fromHexString("#000000"),
+          RgbaColor.fromHexString("#FFFFFF"),
         ]
 
         // Set the clip
@@ -196,15 +186,15 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
         fractions = [0, 0.125, 0.25, 0.347222, 0.5, 0.652777, 0.75, 0.875, 1]
 
         colors = [
-          new rgbaColor("#FFFFFF"),
-          new rgbaColor("#D2D2D2"),
-          new rgbaColor("#B3B3B3"),
-          new rgbaColor("#EEEEEE"),
-          new rgbaColor("#A0A0A0"),
-          new rgbaColor("#EEEEEE"),
-          new rgbaColor("#B3B3B3"),
-          new rgbaColor("#D2D2D2"),
-          new rgbaColor("#FFFFFF"),
+          RgbaColor.fromHexString("#FFFFFF"),
+          RgbaColor.fromHexString("#D2D2D2"),
+          RgbaColor.fromHexString("#B3B3B3"),
+          RgbaColor.fromHexString("#EEEEEE"),
+          RgbaColor.fromHexString("#A0A0A0"),
+          RgbaColor.fromHexString("#EEEEEE"),
+          RgbaColor.fromHexString("#B3B3B3"),
+          RgbaColor.fromHexString("#D2D2D2"),
+          RgbaColor.fromHexString("#FFFFFF"),
         ]
         
         // Set the clip
@@ -221,23 +211,23 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
         fractions = [0, 0.09, 0.12, 0.16, 0.25, 0.29, 0.33, 0.38, 0.48, 0.52, 0.63, 0.68, 0.8, 0.83, 0.87, 0.97, 1]
 
         colors = [
-          new rgbaColor("#FFFFFF"),
-          new rgbaColor("#FFFFFF"),
-          new rgbaColor("#888890"),
-          new rgbaColor("#A4B9BE"),
-          new rgbaColor("#9EB3B6"),
-          new rgbaColor("#707070"),
-          new rgbaColor("#DDE3E3"),
-          new rgbaColor("#9BB0B3"),
-          new rgbaColor("#9CB0B1"),
-          new rgbaColor("#FEFFFF"),
-          new rgbaColor("#FFFFFF"),
-          new rgbaColor("#9CB4B4"),
-          new rgbaColor("#C6D1D3"),
-          new rgbaColor("#F6F8F7"),
-          new rgbaColor("#CCD8D8"),
-          new rgbaColor("#A4BCBE"),
-          new rgbaColor("#FFFFFF"),
+          RgbaColor.fromHexString("#FFFFFF"),
+          RgbaColor.fromHexString("#FFFFFF"),
+          RgbaColor.fromHexString("#888890"),
+          RgbaColor.fromHexString("#A4B9BE"),
+          RgbaColor.fromHexString("#9EB3B6"),
+          RgbaColor.fromHexString("#707070"),
+          RgbaColor.fromHexString("#DDE3E3"),
+          RgbaColor.fromHexString("#9BB0B3"),
+          RgbaColor.fromHexString("#9CB0B1"),
+          RgbaColor.fromHexString("#FEFFFF"),
+          RgbaColor.fromHexString("#FFFFFF"),
+          RgbaColor.fromHexString("#9CB4B4"),
+          RgbaColor.fromHexString("#C6D1D3"),
+          RgbaColor.fromHexString("#F6F8F7"),
+          RgbaColor.fromHexString("#CCD8D8"),
+          RgbaColor.fromHexString("#A4BCBE"),
+          RgbaColor.fromHexString("#FFFFFF"),
         ]
         // Set the clip
         linFCtx.beginPath()
@@ -264,6 +254,3 @@ const drawLinearFrameImage = function (ctx: CanvasCtx, frame: FrameDesignDef, wi
 
   ctx.drawImage(cache[CACHE_KEY], 0, 0)
 }
-const cache: CanvasCache = {}
-
-export default drawLinearFrameImage
