@@ -35,6 +35,7 @@ export class RgbaColor {
 
   setRed (r: number) {
     this.#red = range(r, 255)
+    return this
   }
 
   getGreen () {
@@ -43,6 +44,7 @@ export class RgbaColor {
 
   setGreen (g: number) {
     this.#green = range(g, 255)
+    return this
   }
 
   getBlue () {
@@ -51,6 +53,7 @@ export class RgbaColor {
 
   setBlue (b: number) {
     this.#blue = range(b, 255)
+    return this
   }
 
   getAlpha () {
@@ -59,6 +62,7 @@ export class RgbaColor {
 
   setAlpha (a: number) {
     this.#alpha = range(a, 1)
+    return this
   }
 
   toRgbaString () {
