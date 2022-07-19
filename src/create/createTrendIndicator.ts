@@ -1,6 +1,6 @@
 import { LedColorDef } from '../customization/color-defs'
 import { TrendStateDef } from '../customization/type-descriptors'
-import { hexToRgba } from '../utils/colors'
+import { hexToRgba } from '../colors/colors'
 import { createBuffer } from '../utils/common'
 import { TWO_PI } from '../utils/constants'
 import { createLinearGradient, createRadialGradient } from '../utils/gradients'

@@ -1,4 +1,4 @@
-import { hexToRgba } from "../utils/colors"
+import { hexToRgba } from "../colors/colors"
 import { TWO_PI } from "../utils/constants"
 
 type CanvasCtx = CanvasRenderingContext2D
