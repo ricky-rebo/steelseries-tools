@@ -1,7 +1,11 @@
-import CarbonBuffer from '../../textures/CarbonBuffer'
-import PunchedSheetBuffer from '../../textures/PunchedSheetBuffer'
+// import CarbonBuffer from '../../textures/CarbonBuffer'
+// import PunchedSheetBuffer from '../../textures/PunchedSheetBuffer'
+
+import CarbonTexture from '../../textures/carbon-texture.svg'
+import PunchedSheetTexture from '../../textures/punchedsheet-texture.svg'
+
 import { BrushedMetalTexture } from '../../textures/BrushedMetalTexture'
-import { drawRoundedRectangle, createBuffer } from '../../utils/common'
+import { drawRoundedRectangle, createBuffer, prepareTexture } from '../../utils/common'
 import { RgbaColor } from '../../colors/RgbaColor'
 import { ConicalGradient } from '../../colors/ConicalGradient'
 import { TWO_PI } from '../../utils/constants'
@@ -19,7 +23,7 @@ const cache: CanvasCache = {}
  * @param vertical 
  */
 export function drawLinearBackground (ctx: CanvasCtx, color: BackgroundColorDef, width: number, height: number, vertical: boolean) {
-  const CACHE_KEY = `${width}${height}${vertical}${color.name}`
+  const CACHE_KEY = `${color.name}${width}${height}${vertical}`
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
@@ -123,12 +127,14 @@ export function drawLinearBackground (ctx: CanvasCtx, color: BackgroundColorDef,
 
 function drawTextureBackground (ctx: CanvasCtx, color: BackgroundColorDef, width: number, height: number, offset: number, cornerRadius: number) {
   if (color.name === 'CARBON') {
-    ctx.fillStyle = (ctx.createPattern(CarbonBuffer, 'repeat') as CanvasPattern)
+    // ctx.fillStyle = (ctx.createPattern(CarbonBuffer, 'repeat') as CanvasPattern)
+    ctx.fillStyle = (ctx.createPattern(prepareTexture(CarbonTexture), 'repeat') as CanvasPattern)
     ctx.fill()
   }
 
    else if (color.name === 'PUNCHED_SHEET') {
-    ctx.fillStyle = (ctx.createPattern(PunchedSheetBuffer, 'repeat') as CanvasPattern)
+    // ctx.fillStyle = (ctx.createPattern(PunchedSheetBuffer, 'repeat') as CanvasPattern)
+    ctx.fillStyle = (ctx.createPattern(prepareTexture(PunchedSheetTexture), 'repeat') as CanvasPattern)
     ctx.fill()
   }
 

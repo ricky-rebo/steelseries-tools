@@ -10,6 +10,10 @@ export { drawFrame } from "./draw/drawFrame"
 export { drawBackground } from "./draw/drawBackground";
 export { drawForeground } from "./draw/drawForeground"
 
+// Main linear structure
+export { drawLinearFrame } from "./draw/linear/drawLinearFrame";
+export { drawLinearBackground } from "./draw/linear/drawLinearBackground";
+
 export { drawTickmarks } from "./draw/drawTickmarks";
 export { drawTickmarkLables } from "./draw/drawTickmarkLables";
 
@@ -22,3 +26,4 @@ export {
   LabelNumberFormat,
   TickLabelOrientation
 } from "./customization/types"
+

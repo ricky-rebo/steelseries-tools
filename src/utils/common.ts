@@ -81,3 +81,9 @@ export function rotateContext (ctx: CanvasRenderingContext2D, angle: number, cen
   ctx.rotate(angle)
   ctx.translate(-centerX, -centerY)
 }
+
+export function prepareTexture (svg: string) {
+  const texture = new Image()
+  texture.src = `data:image/svg+xml;base64,${window.btoa(svg)}`
+  return texture
+}
