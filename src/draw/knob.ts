@@ -2,6 +2,7 @@ import { createKnobImage } from '../create/createKnobImage';
 import { KnobStyleDef, KnobTypeDef } from '../customization/type-descriptors';
 import { TWO_PI } from "../utils/constants";
 
+// TODO doocs
 export function drawKnob (ctx: CanvasCtx, type: KnobTypeDef, style: KnobStyleDef, width = ctx.canvas.width, height = ctx.canvas.height) {
   const knobSize = Math.ceil(height * 0.084112)
   const knobX = width * 0.5 - knobSize / 2

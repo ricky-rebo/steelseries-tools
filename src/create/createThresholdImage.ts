@@ -2,6 +2,8 @@ import { createBuffer, rotateContext } from '../utils/common'
 import { HALF_PI, PI } from '../utils/constants'
 import { createLinearGradient } from '../utils/gradients'
 
+const cache: CanvasCache = {}
+
 // TODO docs
 export function createThresholdImage (width: number, height: number, linear = false, vertical = false) {
   const CACHE_KEY = width.toString() + height.toString() + linear + vertical
@@ -43,8 +45,6 @@ export function createThresholdImage (width: number, height: number, linear = fa
 
   return cache[CACHE_KEY]
 }
-
-const cache: { [key: string]: HTMLCanvasElement} = {}
 
 
 function createIndicatorPath (width: number, height: number) {

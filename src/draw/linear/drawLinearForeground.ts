@@ -9,7 +9,6 @@ export function drawLinearForeground (ctx: CanvasCtx, width: number, height: num
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
-    // Setup buffer
     const linFgBuffer = createBuffer(width, height)
     const linFgCtx = linFgBuffer.getContext('2d')
 

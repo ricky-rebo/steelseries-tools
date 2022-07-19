@@ -1,8 +1,7 @@
 import { ColorDef } from "../customization/color-defs"
 import { createRadialGradient } from "../utils/gradients"
 
-type CanvasCtx = CanvasRenderingContext2D
-
+// TODO docs
 export function drawActiveBargraphLed (ctx: CanvasCtx, color: ColorDef, mainCtx: CanvasCtx, vertical: boolean) {
   const centerX = ctx.canvas.width / 2
   const centerY = ctx.canvas.height / 2
@@ -16,7 +15,6 @@ export function drawActiveBargraphLed (ctx: CanvasCtx, color: ColorDef, mainCtx:
   ])
 
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-  // ctx.fill()
 
   ctx.restore()
 }

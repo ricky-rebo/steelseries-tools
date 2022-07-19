@@ -1,5 +1,6 @@
 import { TWO_PI } from "../utils/constants"
 
+// TODO docs
 export function drawRadialCustomImage (ctx: CanvasRenderingContext2D, img: CanvasImageSource) {
   const width = ctx.canvas.width
   const height = ctx.canvas.height

@@ -1,6 +1,8 @@
 import { createBuffer, rotateContext } from "../utils/common"
 import { HALF_PI, PI } from "../utils/constants"
 
+const cache: CanvasCache = {}
+
 // TODO docs
 export function createMeasuredValueImage (size: number, indicatorColor: string, linear = false, vertical = false) {
   const CACHE_KEY = size.toString() + indicatorColor + linear + vertical
@@ -29,8 +31,6 @@ export function createMeasuredValueImage (size: number, indicatorColor: string, 
   
   return cache[CACHE_KEY]
 }
-const cache: { [key: string]: HTMLCanvasElement } = {}
-
 
 function createIndicatorPath(size: number) {
   const path = new Path2D()

@@ -7,12 +7,12 @@ import { createLinearGradient, createRadialGradient } from '../utils/gradients'
 
 const cache: CanvasCache = {}
 
+// TODO docs
 export function drawFrame (ctx: CanvasCtx, frame: FrameDesignDef, centerX: number, centerY: number, width: number, height: number) {
-  const CACHE_KEY = `${width}${height}${frame.design}`
+  const CACHE_KEY = `${frame.design}${width}${height}`
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
-    // Setup buffer
     const radFBuffer = createBuffer(width, height)
     const radFCtx = radFBuffer.getContext('2d')
 

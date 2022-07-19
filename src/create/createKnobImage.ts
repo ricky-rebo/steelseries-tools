@@ -2,6 +2,8 @@ import { KnobTypeDef, KnobStyleDef } from '../customization/type-descriptors'
 import { createBuffer } from '../utils/common'
 import { drawMetalKnobImage, drawStandardKnobImage } from '../draw/knob'
 
+const cache: CanvasCache = {}
+
 // TODO docs
 export function createKnobImage (size: number, knobType: KnobTypeDef, knobStyle: KnobStyleDef) {
   const CACHE_KEY = size.toString() + knobType.type + knobStyle.style
@@ -31,5 +33,3 @@ export function createKnobImage (size: number, knobType: KnobTypeDef, knobStyle:
 
   return cache[CACHE_KEY]
 }
-
-const cache: { [key: string]: HTMLCanvasElement } = {}

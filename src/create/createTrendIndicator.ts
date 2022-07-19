@@ -1,10 +1,13 @@
 import { LedColorDef } from '../customization/color-defs'
 import { TrendStateDef } from '../customization/type-descriptors'
-import { hexToRgba } from '../colors/colors'
+import { hexToRgba } from '../colors/conversion'
 import { createBuffer } from '../utils/common'
 import { TWO_PI } from '../utils/constants'
 import { createLinearGradient, createRadialGradient } from '../utils/gradients'
 
+const cache: CanvasCache = {}
+
+// TODO docs
 export function createTrendIndicator (width: number, trendState: TrendStateDef, colors: LedColorDef[]) {
   const CACHE_KEY = trendState.state + width + JSON.stringify(colors)
   
@@ -35,7 +38,6 @@ export function createTrendIndicator (width: number, trendState: TrendStateDef, 
         drawEquals(trendCtx, width, height, colors[1], true)
         break
       case 'down':
-      /* falls through */
       default:
         drawUpArrow(trendCtx, width, height, colors[0], false)
         drawEquals(trendCtx, width, height, colors[1], false)
@@ -49,14 +51,10 @@ export function createTrendIndicator (width: number, trendState: TrendStateDef, 
   return cache[CACHE_KEY]
 }
 
-const cache: { [key: string]: HTMLCanvasElement} = {}
-
 
 /* ***** DRAW FUNCTIONS ***** */
 
 function drawUpArrow (ctx: CanvasRenderingContext2D, width: number, height: number, color: LedColorDef, on: boolean) {
-  // draw up arrow (red)
-
   let fill
   if (on) {
     fill = createRadialGradient(ctx, 0.5 * width, 0.2 * height, 0, 0.5 * width, [
@@ -123,8 +121,6 @@ function drawUpArrow (ctx: CanvasRenderingContext2D, width: number, height: numb
 }
 
 function drawEquals (ctx: CanvasRenderingContext2D, width: number, height: number, color: LedColorDef, on: boolean) {
-  // draw equal symbol
-
   if (on) {
     ctx.rect(0.128 * width, 0.41 * height, 0.744 * width, 0.074 * height)
     ctx.rect(0.128 * width, 0.516 * height, 0.744 * width, 0.074 * height)
@@ -201,8 +197,6 @@ function drawEquals (ctx: CanvasRenderingContext2D, width: number, height: numbe
 }
 
 function drawDownArrow (ctx: CanvasRenderingContext2D, width: number, height: number, color: LedColorDef, on: boolean) {
-    // draw down arrow
-
     let fill
     if (on) {
       fill = createRadialGradient(ctx, 0.5 * width, 0.8 * height, 0, 0.5 * width, [
@@ -274,4 +268,4 @@ function drawDownArrow (ctx: CanvasRenderingContext2D, width: number, height: nu
       ctx.closePath()
       ctx.fill()
     }
-  }
+}

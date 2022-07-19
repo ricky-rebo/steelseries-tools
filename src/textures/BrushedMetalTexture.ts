@@ -2,6 +2,7 @@ import { createBuffer, range } from '../utils/common'
 import { PI } from "../utils/constants"
 import { RgbaColor } from '../colors/RgbaColor'
 
+// TODO docs
 export class BrushedMetalTexture {
   #color: RgbaColor
   #radius: number

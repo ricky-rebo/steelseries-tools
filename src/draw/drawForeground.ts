@@ -6,8 +6,9 @@ import { createLinearGradient, createRadialGradient } from "../utils/gradients"
 
 const cache: CanvasCache = {}
 
-export const drawForeground = function(ctx: CanvasCtx, foreground: ForegroundTypeDef, width = ctx.canvas.width, height = ctx.canvas.height) {
-  const CACHE_KEY = `${width}${height}${foreground.type}`
+// TODO docs
+export function drawForeground (ctx: CanvasCtx, foreground: ForegroundTypeDef, width = ctx.canvas.width, height = ctx.canvas.height) {
+  const CACHE_KEY = `${foreground.type}${width}${height}`
   // ${withCenterKnob}${knob?.type ?? "-"}${style?.style ?? "-"}${orientation?.type ?? "-"}
 
   // check if we have already created and cached this buffer, if so return it and exit

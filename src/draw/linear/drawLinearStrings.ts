@@ -2,8 +2,7 @@ import { GaugeTypeDef } from '../../customization/type-descriptors'
 import { STD_FONT_NAME } from '../../utils/constants'
 import { RgbaColor } from '../../colors/RgbaColor'
 
-type CanvasCtx = CanvasRenderingContext2D
-
+// TODO docs
 export function drawLinearStrings (ctx: CanvasCtx, title: string, unit: string, labelColor: RgbaColor, vertical: boolean, lcdVisible: boolean, gaugeType: GaugeTypeDef) {
   const width = ctx.canvas.width
   const height = ctx.canvas.height

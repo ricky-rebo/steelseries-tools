@@ -6,7 +6,6 @@ const MAX_MAJOR_TICKS_COUNT = 10
 const MAX_MINOR_TICKS_COUNT = 10
 
 // TODO docs
-// IMPROVE move width and height parameters to bottom and set defaults
 export function drawLinearTickmarks (
   ctx: CanvasCtx,
   width: number,

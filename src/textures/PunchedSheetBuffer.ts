@@ -1,6 +1,7 @@
 import { drawToBuffer } from "../utils/common"
 
-const PunchedSheetBuffer = drawToBuffer(15, 15, function(ctx) {
+// TODO docs
+export const PunchedSheetBuffer = drawToBuffer(15, 15, function(ctx) {
   const width = ctx.canvas.width
   const height = ctx.canvas.height
   let grad
@@ -72,5 +73,3 @@ const PunchedSheetBuffer = drawToBuffer(15, 15, function(ctx) {
 
   ctx.restore()
 })
-
-export default PunchedSheetBuffer

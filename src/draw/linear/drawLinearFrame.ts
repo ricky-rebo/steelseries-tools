@@ -1,13 +1,15 @@
 import { RgbaColor } from '../../colors/RgbaColor'
 import { ConicalGradient } from '../../colors/ConicalGradient'
 import { FrameDesignDef } from '../../customization/type-descriptors'
-import { createBuffer, drawRoundedRectangle } from '../../utils/common'
+import { createBuffer } from '../../utils/common'
 import { createLinearGradient } from '../../utils/gradients'
+import { drawRoundedRectangle } from '../misc'
 
 const cache: CanvasCache = {}
 
+// TODO doocs
 export const drawLinearFrame = function (ctx: CanvasCtx, frame: FrameDesignDef, width: number, height: number, vertical: boolean) {
-  const CACHE_KEY = width.toString() + height + frame.design + vertical
+  const CACHE_KEY = `${frame.design}${width}${height}${vertical}`
   
   let grad
   let fractions = []

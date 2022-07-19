@@ -2,6 +2,9 @@ import { LedColorDef } from '../customization/color-defs'
 import { drawLed, drawLedCorona } from '../draw/led'
 import { createBuffer } from '../utils/common'
 
+const cache: CanvasCache = {}
+
+// TODO docs
 export function createLedImage (size: number, on: boolean, ledColor: LedColorDef) {
   const CACHE_KEY = size.toString() + on + JSON.stringify(ledColor)
 
@@ -26,5 +29,3 @@ export function createLedImage (size: number, on: boolean, ledColor: LedColorDef
   }
   return cache[CACHE_KEY]
 }
-
-const cache: { [key: string]: HTMLCanvasElement } = {}

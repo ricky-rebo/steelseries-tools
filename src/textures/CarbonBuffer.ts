@@ -1,7 +1,8 @@
 import { drawToBuffer } from "../utils/common"
 import { createLinearGradient } from "../utils/gradients"
 
-const CarbonBuffer = drawToBuffer(12, 12, function(ctx) {
+// TODO docs
+export const CarbonBuffer = drawToBuffer(12, 12, function(ctx) {
   const width = ctx.canvas.width
   const height = ctx.canvas.height
   let grad
@@ -119,5 +120,3 @@ const CarbonBuffer = drawToBuffer(12, 12, function(ctx) {
 
   ctx.restore()
 })
-
-export default CarbonBuffer

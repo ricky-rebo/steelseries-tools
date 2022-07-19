@@ -1,5 +1,3 @@
-type CanvasCtx = CanvasRenderingContext2D
-
 type ColorStop = { offset: number, color: string }
 
 // TODO internal docs

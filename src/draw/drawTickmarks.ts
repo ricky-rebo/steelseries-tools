@@ -10,17 +10,7 @@ const MAJOR_TICK_LINE_WIDTH = 1.5
 const MEDIUM_TICK_LINE_WIDTH = 1
 const MINOR_TICK_LINE_WIDTH = 0.5
 
-/**
- * // TODO docs
- * // FIXME sposta size come ultimo parametro, di default = Math.min(canvas.width, canvas.height)
- * @param ctx 
- * @param canvasSize 
- * @param gaugeType 
- * @param backgroundColor 
- * @param minValue 
- * @param maxValue 
- * @param niceValues 
- */
+// TODO docs
 function drawTickmarks (ctx: CanvasCtx, canvasSize: number, gaugeType: GaugeTypeDef, backgroundColor: BackgroundColorDef, minValue: number, maxValue: number, niceValues = true) {
   const center = canvasSize / 2
 

@@ -11,18 +11,7 @@ interface LabelParams {
   altPos?: boolean
 }
 
-/**
- * // TODO docs
- * // FIXME sposta size come ultimo parametro, default = Math.min(canvas.width, canvas.height)
- * @param ctx 
- * @param canvasSize 
- * @param gaugeType 
- * @param param3 
- * @param minValue 
- * @param maxValue 
- * @param niceValues 
- * @param param7 
- */
+// TODO docs
 export function drawTickmarkLables (
   ctx: CanvasCtx, 
   canvasSize: number, 

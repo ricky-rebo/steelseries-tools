@@ -1,5 +1,6 @@
 import { GaugeTypeDef } from "../../customization/type-descriptors"
 
+// TODO docs
 export function drawLinearIndicator (
   ctx: CanvasCtx,
   indicator: HTMLCanvasElement,

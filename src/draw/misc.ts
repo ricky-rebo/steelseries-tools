@@ -1,4 +1,4 @@
-type CanvasCtx = CanvasRenderingContext2D
+// TODO docs
 export function drawRoundedRectangle (ctx: CanvasCtx, x: number, y: number, w: number, h: number, radius: number) {
   const r = x + w
   const b = y + h

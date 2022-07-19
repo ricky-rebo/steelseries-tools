@@ -2,8 +2,7 @@ import { TWO_PI, RAD_FACTOR } from '../utils/constants'
 import { createLinearGradient } from '../utils/gradients'
 import { RgbaColor } from '../colors/RgbaColor'
 
-type CanvasCtx = CanvasRenderingContext2D
-
+// TODO docs
 export function drawRoseImage (ctx: CanvasCtx, symbolColor: RgbaColor) {
   const width = ctx.canvas.width
   const height = ctx.canvas.height

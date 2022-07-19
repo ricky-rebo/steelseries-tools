@@ -1,8 +1,7 @@
-import { hexToRgba } from "../colors/colors"
+import { hexToRgba } from "../colors/conversion"
 import { TWO_PI } from "../utils/constants"
 
-type CanvasCtx = CanvasRenderingContext2D
-
+// TODO doocs
 export function drawLed(ctx: CanvasCtx, size: number, innerColor1: string, innerColor2: string, outerColor: string) {
   const center = 2 * Math.round(size / 4)
   let grad

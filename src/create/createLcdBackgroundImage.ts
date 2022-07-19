@@ -2,6 +2,9 @@ import { LcdColorDef } from '../customization/color-defs'
 import { drawRoundedRectangle } from '../draw/misc'
 import { createBuffer } from '../utils/common'
 
+const cache: CanvasCache = {}
+
+// TODO docs
 export function createLcdBackgroundImage (width: number, height: number, lcdColor: LcdColorDef) {
   const CACHE_KEY = width.toString() + height + JSON.stringify(lcdColor)
 
@@ -31,6 +34,7 @@ export function createLcdBackgroundImage (width: number, height: number, lcdColo
     // background
     drawRoundedRectangle(lcdCtx, bgStartX, bgStartY, bgWidth, bgHeight, bgRadius)
 
+    // TODO use createLinearGradient() helper
     grad = lcdCtx.createLinearGradient(0, bgStartY, 0, bgStartY + bgHeight)
     grad.addColorStop(0, '#4c4c4c')
     grad.addColorStop(0.08, '#666666')
@@ -42,6 +46,7 @@ export function createLcdBackgroundImage (width: number, height: number, lcdColo
     // foreground
     drawRoundedRectangle(lcdCtx, fgStartX, fgStartY, fgWidth, fgHeight, fgRadius)
 
+    // TODO use createLinearGradient() helper
     grad = lcdCtx.createLinearGradient(0, fgStartY, 0, fgStartY + fgHeight)
     grad.addColorStop(0, lcdColor.gradientStartColor)
     grad.addColorStop(0.03, lcdColor.gradientFraction1Color)
@@ -57,7 +62,5 @@ export function createLcdBackgroundImage (width: number, height: number, lcdColo
 
   return cache[CACHE_KEY]
 }
-
-const cache: { [key: string]: HTMLCanvasElement } = {}
 
 export default createLcdBackgroundImage

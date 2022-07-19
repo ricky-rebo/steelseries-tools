@@ -1,27 +1,18 @@
-// import CarbonBuffer from '../../textures/CarbonBuffer'
-// import PunchedSheetBuffer from '../../textures/PunchedSheetBuffer'
-
 import CarbonTexture from '../../textures/carbon-texture.svg'
 import PunchedSheetTexture from '../../textures/punchedsheet-texture.svg'
 
 import { BrushedMetalTexture } from '../../textures/BrushedMetalTexture'
-import { drawRoundedRectangle, createBuffer, prepareTexture } from '../../utils/common'
+import { createBuffer, prepareTexture } from '../../utils/common'
 import { RgbaColor } from '../../colors/RgbaColor'
 import { ConicalGradient } from '../../colors/ConicalGradient'
 import { TWO_PI } from '../../utils/constants'
 import { BackgroundColorDef } from '../../customization/color-defs'
 import { createLinearGradient } from '../../utils/gradients'
+import { drawRoundedRectangle } from '../misc'
 
 const cache: CanvasCache = {}
 
-/**
- * // TODO docs
- * @param ctx 
- * @param color 
- * @param width 
- * @param height 
- * @param vertical 
- */
+// TODO docs
 export function drawLinearBackground (ctx: CanvasCtx, color: BackgroundColorDef, width: number, height: number, vertical: boolean) {
   const CACHE_KEY = `${color.name}${width}${height}${vertical}`
 
