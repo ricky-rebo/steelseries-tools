@@ -342,7 +342,8 @@ export const LcdColor = {
     '#000000'
   )
 }
-const Color = {
+
+export const Color = {
   RED: new ColorDef(
     new RgbaColor(82, 0, 0, 1),
     new RgbaColor(158, 0, 19, 1),
@@ -448,7 +449,6 @@ const Color = {
     new RgbaColor(234, 247, 218, 1)
   )
 }
-export { Color as ColorDef }
 
 export const LedColor = {
   RED_LED: new LedColorDef(
