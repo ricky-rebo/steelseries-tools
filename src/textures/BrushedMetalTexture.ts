@@ -1,6 +1,6 @@
-import { createBuffer, range } from '../utils/common'
-import { PI } from "../utils/constants"
-import { RgbaColor } from '../colors/RgbaColor'
+import { createBuffer, range } from '../helpers/common'
+import { PI } from "../shared"
+import { RgbaColor } from '../model/RgbaColor'
 
 // TODO docs
 export class BrushedMetalTexture {

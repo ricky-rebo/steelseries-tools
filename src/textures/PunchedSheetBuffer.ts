@@ -1,4 +1,4 @@
-import { drawToBuffer } from "../utils/common"
+import { drawToBuffer } from "../helpers/common"
 
 // TODO docs
 export const PunchedSheetBuffer = drawToBuffer(15, 15, function(ctx) {

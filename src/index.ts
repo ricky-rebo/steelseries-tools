@@ -1,53 +1,51 @@
-// Main radial structure
-export { drawFrame } from "./draw/drawFrame"
-export { drawBackground } from "./draw/drawBackground";
-export { drawForeground } from "./draw/drawForeground"
+// Structure Layer
+export { drawFrame } from "./functions/structure/drawFrame"
+export { drawBackground } from "./functions/structure/drawBackground";
+export { drawForeground } from "./functions/structure/drawForeground"
+export { drawKnob } from "./functions/structure/drawKnob";
+export { drawCustomLayer } from "./functions/structure/drawCustomLayer";
 
+export { drawLinearFrame } from "./functions/structure/drawLinearFrame";
+export { drawLinearBackground } from "./functions/structure/drawLinearBackground";
+export { drawLinearForeground } from "./functions/structure/drawLinearForeground";
 
-// Main linear structure
-export { drawLinearFrame } from "./draw/linear/drawLinearFrame";
-export { drawLinearBackground } from "./draw/linear/drawLinearBackground";
-export { drawLinearForeground } from "./draw/linear/drawLinearForeground";
+// Data Visualization Layer
+export { drawStrings } from "./functions/data-visualization/drawStrings";
+export { drawTickmarks } from "./functions/data-visualization/drawTickmarks";
+export { drawTickmarkLables } from "./functions/data-visualization/drawTickmarkLables";
 
-export { drawKnob } from "./draw/drawKnob";
+export { drawLinearStrings } from "./functions/data-visualization/drawLinearStrings";
+export { drawLinearTickmarks } from "./functions/data-visualization/drawLinearTickmarks";
 
-export { drawTickmarks } from "./draw/drawTickmarks";
-export { drawTickmarkLables } from "./draw/drawTickmarkLables";
+// Pointers
+export { createMeasuredValuePointerImage as createMeasuredValueImage } from "./functions/pointers/createMeasuredValuePointerImage";
+export { createThresholdPointerImage as createThresholdImage } from "./functions/pointers/createThresholdPointerImage";
+export { createTrendIndicator } from "./functions/pointers/createTrendIndicator"; // Rimuovere ???
+export { drawLinearIndicator } from "./functions/pointers/drawLinearIndicator"; // Rimuovere ???
+export { drawPointerImage } from "./functions/pointers/drawPointerImage";
 
-export { drawActiveBargraphLed } from "./draw/drawActiveBargraphLed";
-export { drawPointerImage } from "./draw/drawPointerImage";
-export { drawRadialCustomImage } from "./draw/drawRadialCustomImage";
-export { drawRoseImage } from "./draw/drawRoseImage";
-export { drawStrings } from "./draw/drawStrings";
+// ***** TO BE REMOVED *****
+export { createLcdBackgroundImage } from "./__to_be_removed/createLcdBackgroundImage";
+export { createLedImage } from "./__to_be_removed/createLedImage";
+export { drawActiveBargraphLed } from "./__to_be_removed/drawActiveBargraphLed";
+export { drawRoseImage } from "./__to_be_removed/drawRoseImage";
 
-export { drawLinearIndicator } from "./draw/linear/drawLinearIndicator";
-export { drawLinearStrings } from "./draw/linear/drawLinearStrings";
-export { drawLinearTickmarks } from "./draw/linear/drawLinearTickmarks";
+// Enums
+export { BackgroundColor } from "./enums/colors/BackgroundColor";
+export { Color as ColorDef } from "./enums/colors/Color";
+export { LcdColor } from "./enums/colors/LcdColor";
+export { LedColor } from "./enums/colors/LedColor";
 
+export { GaugeType } from "./enums/types/GaugeType";
+export { Orientation } from "./enums/types/Orientation";
+export { KnobType } from "./enums/types/KnobType";
+export { KnobStyle } from "./enums/types/KnobStyle";
+export { FrameDesign } from "./enums/types/FrameDesign";
+export { PointerType } from "./enums/types/PointerType";
+export { ForegroundType } from "./enums/types/ForegroundType";
+export { LabelNumberFormat } from "./enums/types/LabelNumberFormat";
+export { TickLabelOrientation } from "./enums/types/TickLabelOrientation";
+export { TrendState } from "./enums/types/TrendState";
 
-export { createLcdBackgroundImage } from "./create/createLcdBackgroundImage";
-export { createLedImage } from "./create/createLedImage";
-export { createMeasuredValueImage } from "./create/createMeasuredValueImage";
-export { createThresholdImage } from "./create/createThresholdImage";
-export { createTrendIndicator } from "./create/createTrendIndicator";
-
-export {
-  Color as ColorDef,
-  BackgroundColor,
-  LcdColor,
-  LedColor
-} from "./customization/colors";
-
-export {
-  GaugeType,
-  Orientation,
-  KnobType,
-  KnobStyle,
-  FrameDesign,
-  PointerType,
-  ForegroundType,
-  LabelNumberFormat,
-  TickLabelOrientation,
-  TrendState
-} from "./customization/types"
-
+// Helpers
+// TODO valutare quali helper esportare

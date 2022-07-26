@@ -1,5 +1,5 @@
-import { drawToBuffer } from "../utils/common"
-import { createLinearGradient } from "../utils/gradients"
+import { drawToBuffer } from "../helpers/common"
+import { createLinearGradient } from "../helpers/gradients"
 
 // TODO docs
 export const CarbonBuffer = drawToBuffer(12, 12, function(ctx) {
