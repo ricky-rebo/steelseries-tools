@@ -6,26 +6,31 @@ import { calcNiceNumber } from '../../helpers/common'
 const MAX_MAJOR_TICKS_COUNT = 10
 const MAX_MINOR_TICKS_COUNT = 10
 
+interface Options {
+  width?: number;
+  height?: number;
+  gaugeType: GaugeTypeDef;
+  backgroundColor: BackgroundColorDef;
+  labelFormat: LabelNumberFormatDef;
+  minValue: number;
+  maxValue: number;
+  niceScale: boolean;
+  vertical: boolean;
+}
+
 // TODO docs
-export function drawLinearTickmarks (
-  ctx: CanvasCtx,
-  width: number,
-  height: number,
-  gaugeType: GaugeTypeDef,
-  bgColor: BackgroundColorDef,
-  labelFormat: LabelNumberFormatDef,
-  minValue: number,
-  maxValue: number,
-  niceScale: boolean,
-  vertical: boolean
-) {
+export function drawLinearTickmarks (ctx: CanvasCtx, opt: Options) {
+  const width = opt.width ?? ctx.canvas.width
+  const height = opt.height ?? ctx.canvas.height
+
+
   // Parameters init
-  bgColor.labelColor.setAlpha(1)
+  opt.backgroundColor.labelColor.setAlpha(1)
 
   let majorTickSpacing = 10
   let minorTickSpacing = 1
-  if (niceScale) {
-    const niceRange = calcNiceNumber(maxValue - minValue, false)
+  if (opt.niceScale) {
+    const niceRange = calcNiceNumber(opt.maxValue - opt.minValue, false)
     majorTickSpacing = calcNiceNumber(niceRange / (MAX_MAJOR_TICKS_COUNT - 1), true)
     minorTickSpacing = calcNiceNumber(majorTickSpacing / (MAX_MINOR_TICKS_COUNT - 1), true)
   }
@@ -35,11 +40,14 @@ export function drawLinearTickmarks (
     minorTickStart, minorTickStop,
     mediumTickStart , mediumTickStop,
     majorTickStart, majorTickStop 
-  } = calcTicksSize(width, height, vertical)
+  } = calcTicksSize(width, height, opt.vertical)
 
-  const { scaleBoundsX, scaleBoundsY, scaleBoundsW, scaleBoundsH } = calcScaleBounds(width, height, gaugeType, vertical)
+  const {
+    scaleBoundsX, scaleBoundsY,
+    scaleBoundsW, scaleBoundsH
+  } = calcScaleBounds(width, height, opt.gaugeType, opt.vertical)
 
-  const tickSpaceScaling = (vertical ? scaleBoundsH : scaleBoundsW) / (maxValue - minValue)
+  const tickSpaceScaling = (opt.vertical ? scaleBoundsH : scaleBoundsW) / (opt.maxValue - opt.minValue)
 
   const TEXT_WIDTH = width * 0.1
 
@@ -47,24 +55,21 @@ export function drawLinearTickmarks (
 
   // Init context
   ctx.textBaseline = 'middle'
-  ctx.textAlign = vertical ? 'right' : 'center'
+  ctx.textAlign = opt.vertical ? 'right' : 'center'
 
-  ctx.strokeStyle = bgColor.labelColor.getRgbaColor()
-  ctx.fillStyle = bgColor.labelColor.getRgbaColor()
+  ctx.strokeStyle = opt.backgroundColor.labelColor.getRgbaColor()
+  ctx.fillStyle = opt.backgroundColor.labelColor.getRgbaColor()
 
-  let valueCounter = minValue
+  let valueCounter = opt.minValue
   let majorTickCounter = MAX_MINOR_TICKS_COUNT - 1
   let tickCounter
   let currentPos
 
-  let labelCounter
-  for (
-    labelCounter = minValue, tickCounter = 0;
-    labelCounter <= maxValue;
-    labelCounter += minorTickSpacing, tickCounter += minorTickSpacing
-  ) {
+  let i
+  // FIXME ridurre ad un solo indice (tickCounter)
+  for (i = opt.minValue, tickCounter = 0; i <= opt.maxValue; i += minorTickSpacing, tickCounter += minorTickSpacing) {
     // Calculate the bounds of the scaling
-    currentPos = (vertical)
+    currentPos = (opt.vertical)
       ? scaleBoundsY + scaleBoundsH - tickCounter * tickSpaceScaling
       : scaleBoundsX + tickCounter * tickSpaceScaling
 
@@ -72,12 +77,12 @@ export function drawLinearTickmarks (
 
     // Draw tickmark every major tickmark spacing
     if (majorTickCounter === MAX_MINOR_TICKS_COUNT) {
-      drawLinearTick(ctx, majorTickStart, majorTickStop, currentPos, 1.5, vertical)
+      drawLinearTick(ctx, majorTickStart, majorTickStop, currentPos, 1.5, opt.vertical)
 
       // Draw the standard tickmark labels
-      const labelPosX = (vertical) ? width * 0.28 : currentPos
-      const labelPosY = (vertical) ? currentPos : height * 0.73
-      drawLabel(ctx, valueCounter, labelPosX, labelPosY, TEXT_WIDTH, labelFormat)
+      const labelPosX = (opt.vertical) ? width * 0.28 : currentPos
+      const labelPosY = (opt.vertical) ? currentPos : height * 0.73
+      drawLabel(ctx, valueCounter, labelPosX, labelPosY, TEXT_WIDTH, opt.labelFormat)
 
       valueCounter += majorTickSpacing
       majorTickCounter = 0
@@ -86,9 +91,9 @@ export function drawLinearTickmarks (
 
     // Draw tickmark every minor tickmark spacing
     if (MAX_MINOR_TICKS_COUNT % 2 === 0 && majorTickCounter === MAX_MINOR_TICKS_COUNT / 2) {
-      drawLinearTick(ctx, mediumTickStart, mediumTickStop, currentPos, 1, vertical)
+      drawLinearTick(ctx, mediumTickStart, mediumTickStop, currentPos, 1, opt.vertical)
     } else {
-      drawLinearTick(ctx, minorTickStart, minorTickStop, currentPos, 0.5, vertical)
+      drawLinearTick(ctx, minorTickStart, minorTickStop, currentPos, 0.5, opt.vertical)
     }
   }
 

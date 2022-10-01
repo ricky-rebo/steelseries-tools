@@ -5,45 +5,52 @@ import { GaugeTypeDef } from "../../model/GaugeTypeDef"
 import { calcNiceNumber } from "../../helpers/common"
 import { HALF_PI, PI, STD_FONT_NAME } from "../../shared"
 import { MAX_MAJOR_TICKS_COUNT, MAX_MINOR_TICKS_COUNT } from "./drawTickmarks"
+import { GaugeType } from "../../enums/types/GaugeType"
 
-interface LabelParams {
-  format: LabelNumberFormatDef
-  orientation: TickLabelOrientationDef
-  scaleDecimals: number
-  altPos?: boolean
+interface Options {
+  size?: number
+  gaugeType: GaugeTypeDef
+  backgroundColor: BackgroundColorDef
+  minValue: number
+  maxValue: number
+  niceValues?: boolean
+  labelOptions: {
+    format: LabelNumberFormatDef
+    orientation: TickLabelOrientationDef
+    scaleDecimals: number
+    altPos?: boolean
+  }
 }
 
 // TODO docs
-export function drawTickmarkLables (
-  ctx: CanvasCtx, 
-  canvasSize: number, 
-  gaugeType: GaugeTypeDef, 
-  { labelColor }: BackgroundColorDef,
-  minValue: number,
-  maxValue: number,
-  niceValues: boolean,
-  { format, orientation, scaleDecimals, altPos = false }: LabelParams,
-) {
+export function drawTickmarkLables (ctx: CanvasCtx, options: Options) {
+  const canvasSize = options.size ?? Math.min(ctx.canvas.width, ctx.canvas.height)
+  
   const center = canvasSize / 2
 
-  const range = niceValues ? calcNiceNumber(maxValue - minValue, false) : maxValue - minValue
+  const range = options.niceValues
+    ? calcNiceNumber(options.maxValue - options.minValue, false)
+    : options. maxValue - options.minValue
   const majorTickSpacing = calcNiceNumber(range / (MAX_MAJOR_TICKS_COUNT - 1), true)
   const minorTickSpacing = calcNiceNumber(majorTickSpacing / (MAX_MINOR_TICKS_COUNT - 1), true)
 
-  const textTranslateX = altPos ? canvasSize * 0.28 : canvasSize * 0.3
-  const textMaxWidth = (['type1', 'type2'].includes(gaugeType.type))
-    ? (altPos ? canvasSize * 0.0375 : canvasSize * 0.04)
+  const textTranslateX = options.labelOptions.altPos ? canvasSize * 0.28 : canvasSize * 0.3
+  const textMaxWidth = ([GaugeType.TYPE1.type, GaugeType.TYPE2.type].includes(options.gaugeType.type))
+    ? (options.labelOptions.altPos
+        ? canvasSize * 0.0375
+        : canvasSize * 0.04)
     : canvasSize * 0.1
 
-  const maxValueRounded = parseFloat(maxValue.toFixed(2))
+  const maxValueRounded = parseFloat(options.maxValue.toFixed(2))
 
-  const angleStep = gaugeType.angleRange / range
+  const angleStep = options.gaugeType.angleRange / range
   const rotationStep = angleStep * minorTickSpacing
 
-  let alpha = gaugeType.rotationOffset // Tracks total rotation
-  let labelCounter = minValue
+  let alpha = options.gaugeType.rotationOffset // Tracks total rotation
+  let labelCounter = options.minValue
   let majorTickCounter = MAX_MINOR_TICKS_COUNT - 1
 
+  const labelColor = options.backgroundColor.labelColor;
   labelColor.setAlpha(1)
 
   ctx.save()
@@ -56,18 +63,18 @@ export function drawTickmarkLables (
   ctx.fillStyle = labelColor.getRgbaColor()
 
   ctx.translate(center, center)
-  ctx.rotate(gaugeType.rotationOffset)
+  ctx.rotate(options.gaugeType.rotationOffset)
 
-  for (let i = minValue; parseFloat(i.toFixed(2)) <= maxValueRounded; i += minorTickSpacing) {
+  // TODO Optimize -> increment rotation step to match labels count
+  for (let i = options.minValue; parseFloat(i.toFixed(2)) <= maxValueRounded; i += minorTickSpacing) {
     majorTickCounter++
 
-    // Draw major tickmarks
     if (majorTickCounter === MAX_MINOR_TICKS_COUNT) {
       ctx.save()
 
       ctx.translate(textTranslateX, 0)
-      ctx.rotate(getLabelRotationAngle(orientation, alpha))
-      ctx.fillText(getLabelString(format, labelCounter, scaleDecimals), 0, 0, textMaxWidth)
+      ctx.rotate(getLabelRotationAngle(options.labelOptions.orientation, alpha))
+      ctx.fillText(getLabelString(options.labelOptions.format, labelCounter, options.labelOptions.scaleDecimals), 0, 0, textMaxWidth)
 
       ctx.restore()
 

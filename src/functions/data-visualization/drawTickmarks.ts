@@ -10,11 +10,23 @@ const MAJOR_TICK_LINE_WIDTH = 1.5
 const MEDIUM_TICK_LINE_WIDTH = 1
 const MINOR_TICK_LINE_WIDTH = 0.5
 
+interface Options {
+  size?: number,
+  gaugeType: GaugeTypeDef,
+  backgroundColor: BackgroundColorDef
+  minValue: number
+  maxValue: number
+  niceValues?: boolean
+}
+
 // TODO docs
-function drawTickmarks (ctx: CanvasCtx, canvasSize: number, gaugeType: GaugeTypeDef, backgroundColor: BackgroundColorDef, minValue: number, maxValue: number, niceValues = true) {
+function drawTickmarks (ctx: CanvasCtx, options: Options) {
+  const canvasSize = options.size ?? Math.min(ctx.canvas.width, ctx.canvas.height)
   const center = canvasSize / 2
 
-  const range = niceValues ? calcNiceNumber(maxValue - minValue, false) : maxValue - minValue
+  const range = options.niceValues
+    ? calcNiceNumber(options.maxValue - options.minValue, false) 
+    : options.maxValue - options.minValue
   const majorTickSpacing = calcNiceNumber(range / (MAX_MAJOR_TICKS_COUNT - 1), true)
   const minorTickSpacing = calcNiceNumber(majorTickSpacing / (MAX_MINOR_TICKS_COUNT - 1), true)
 
@@ -23,13 +35,13 @@ function drawTickmarks (ctx: CanvasCtx, canvasSize: number, gaugeType: GaugeType
   const mediumTickInnerPoint = canvasSize * 0.355
   const minorTickInnerPoint = canvasSize * 0.36
 
-  const maxValueRounded = parseFloat(maxValue.toFixed(2))
+  const maxValueRounded = parseFloat(options.maxValue.toFixed(2))
 
-  const { angleRange, rotationOffset } = gaugeType
+  const { angleRange, rotationOffset } = options.gaugeType
   const angleStep = angleRange / range
   const rotationStep = angleStep * minorTickSpacing
 
-  const { labelColor } = backgroundColor
+  const { labelColor } = options.backgroundColor
   labelColor.setAlpha(1)
 
   ctx.save()
@@ -44,7 +56,7 @@ function drawTickmarks (ctx: CanvasCtx, canvasSize: number, gaugeType: GaugeType
   ctx.rotate(rotationOffset)
 
   let majorTickCounter = MAX_MINOR_TICKS_COUNT - 1
-  for (let i = minValue; parseFloat(i.toFixed(2)) <= maxValueRounded; i += minorTickSpacing) {
+  for (let i = options.minValue; parseFloat(i.toFixed(2)) <= maxValueRounded; i += minorTickSpacing) {
       majorTickCounter++
 
     // Draw major tickmarks
