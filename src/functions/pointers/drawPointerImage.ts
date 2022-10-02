@@ -5,11 +5,21 @@ import { TWO_PI } from "../../shared"
 import { createLinearGradient, createRadialGradient } from "../../helpers/gradients"
 import { RgbaColor } from "../../model/RgbaColor"
 
+interface Options {
+  size: number
+  pointerType: PointerTypeDef
+  pointerColor: ColorDef
+  labelColor: RgbaColor
+}
+
 const cache: CanvasCache = {}
 
 // TODO docs
-export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: PointerTypeDef, ptrColor: ColorDef, lblColor: RgbaColor) {
-  const CACHE_KEY = size.toString() + ptrType.type + ptrColor.light.toHexString() + ptrColor.medium.toHexString()
+// TODO dividere logica di caching (createPointerImage) e disegno (drawPointer)
+export function drawPointerImage (ctx: CanvasCtx, options: Options) {
+  const size = options.size ?? Math.min(ctx.canvas.width, ctx.canvas.height);
+
+  const CACHE_KEY = options.pointerType.type + options.pointerColor.light.toHexString() + options.pointerColor.medium.toHexString() + size;
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
@@ -20,13 +30,13 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
       throw Error("Unable to get canvas context!")
     }
 
-    switch (ptrType.type) {
+    switch (options.pointerType.type) {
       case "type2":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0, size * 0.471962, 0, size * 0.130841, [
-          { color: lblColor.toRgbaString(), offset: 0 },
-          { color: lblColor.toRgbaString(), offset: 0.36 },
-          { color: ptrColor.light.toRgbaString(), offset: 0.361 },
-          { color: ptrColor.light.toRgbaString(), offset: 1 },
+          { color: options.labelColor.toRgbaString(), offset: 0 },
+          { color: options.labelColor.toRgbaString(), offset: 0.36 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0.361 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 1 },
         ])
 
         ptrCtx.beginPath()
@@ -43,16 +53,16 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
         break
 
       case "type3":
-        ptrCtx.fillStyle = ptrColor.light.toRgbaString()
+        ptrCtx.fillStyle = options.pointerColor.light.toRgbaString()
         ptrCtx.fillRect(size * 0.495327, size * 0.130841, size * 0.009345, size * 0.373831)
         break
 
       case "type4":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0.467289 * size, 0, 0.528036 * size, 0, [
-          { color: ptrColor.dark.toRgbaString(), offset: 0 },
-          { color: ptrColor.dark.toRgbaString(), offset: 0.51 },
-          { color: ptrColor.light.toRgbaString(), offset: 0.52 },
-          { color: ptrColor.light.toRgbaString(), offset: 1 },
+          { color: options.pointerColor.dark.toRgbaString(), offset: 0 },
+          { color: options.pointerColor.dark.toRgbaString(), offset: 0.51 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0.52 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 1 },
         ])
 
         ptrCtx.beginPath()
@@ -70,10 +80,10 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
 
       case "type5":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0.471962 * size, 0, 0.528036 * size, 0, [
-          { color: ptrColor.light.toRgbaString(), offset: 0 },
-          { color: ptrColor.light.toRgbaString(), offset: 0.5 },
-          { color: ptrColor.medium.toRgbaString(), offset: 0.5 },
-          { color: ptrColor.medium.toRgbaString(), offset: 1 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0.5 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0.5 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 1 },
         ])
 
         ptrCtx.beginPath()
@@ -88,12 +98,12 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
         ptrCtx.lineWidth = 1
         ptrCtx.lineCap = "square"
         ptrCtx.lineJoin = "miter"
-        ptrCtx.strokeStyle = ptrColor.dark.toRgbaString()
+        ptrCtx.strokeStyle = options.pointerColor.dark.toRgbaString()
         ptrCtx.stroke()
         break
 
       case "type6":
-        ptrCtx.fillStyle = ptrColor.medium.toRgbaString()
+        ptrCtx.fillStyle = options.pointerColor.medium.toRgbaString()
 
         ptrCtx.beginPath()
         ptrCtx.moveTo(size * 0.481308, size * 0.485981)
@@ -116,8 +126,8 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
 
       case "type7":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0.481308 * size, 0, 0.518691 * size, 0, [
-          { color: ptrColor.dark.toRgbaString(), offset: 0 },
-          { color: ptrColor.medium.toRgbaString(), offset: 1 },
+          { color: options.pointerColor.dark.toRgbaString(), offset: 0 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 1 },
         ])
 
         ptrCtx.beginPath()
@@ -132,12 +142,12 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
 
       case "type8":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0.471962 * size, 0, 0.528036 * size, 0, [
-          { color: ptrColor.light.toRgbaString(), offset: 0 },
-          { color: ptrColor.light.toRgbaString(), offset: 0.5 },
-          { color: ptrColor.medium.toRgbaString(), offset: 0.5 },
-          { color: ptrColor.medium.toRgbaString(), offset: 1 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0.5 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0.5 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 1 },
         ])
-        ptrCtx.strokeStyle = ptrColor.dark.toRgbaString()
+        ptrCtx.strokeStyle = options.pointerColor.dark.toRgbaString()
 
         ptrCtx.beginPath()
         ptrCtx.moveTo(size * 0.5, size * 0.53271)
@@ -179,7 +189,7 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
         ptrCtx.closePath()
         ptrCtx.fill()
 
-        ptrCtx.fillStyle = ptrColor.medium.toRgbaString()
+        ptrCtx.fillStyle = options.pointerColor.medium.toRgbaString()
 
         ptrCtx.beginPath()
         ptrCtx.moveTo(size * 0.495327, size * 0.219626)
@@ -193,12 +203,12 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
 
       case "type10":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0.471962 * size, 0, 0.528036 * size, 0, [
-          { color: ptrColor.light.toRgbaString(), offset: 0 },
-          { color: ptrColor.light.toRgbaString(), offset: 0.5 },
-          { color: ptrColor.medium.toRgbaString(), offset: 0.5 },
-          { color: ptrColor.medium.toRgbaString(), offset: 1 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0.5 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0.5 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 1 },
         ])
-        ptrCtx.strokeStyle = ptrColor.medium.getRgbaColor()
+        ptrCtx.strokeStyle = options.pointerColor.medium.getRgbaColor()
         ptrCtx.lineWidth = 1
         ptrCtx.lineCap = "square"
         ptrCtx.lineJoin = "miter"
@@ -217,10 +227,10 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
 
       case "type11":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0, 0.168224 * size, 0, 0.584112 * size, [
-          { offset: 0, color: ptrColor.medium.toRgbaString() },
-          { offset: 1, color: ptrColor.dark.toRgbaString() }
+          { offset: 0, color: options.pointerColor.medium.toRgbaString() },
+          { offset: 1, color: options.pointerColor.dark.toRgbaString() }
         ])
-        ptrCtx.strokeStyle = ptrColor.dark.getRgbaColor()
+        ptrCtx.strokeStyle = options.pointerColor.dark.getRgbaColor()
 
         ptrCtx.beginPath()
         ptrCtx.moveTo(0.5 * size, 0.168224 * size)
@@ -235,10 +245,10 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
 
       case "type12":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0, 0.168224 * size, 0, 0.504672 * size, [
-          { offset: 0, color: ptrColor.medium.toRgbaString() },
-          { offset: 1, color: ptrColor.dark.toRgbaString() }
+          { offset: 0, color: options.pointerColor.medium.toRgbaString() },
+          { offset: 1, color: options.pointerColor.dark.toRgbaString() }
         ])
-        ptrCtx.strokeStyle = ptrColor.dark.toRgbaString()
+        ptrCtx.strokeStyle = options.pointerColor.dark.toRgbaString()
 
         ptrCtx.beginPath()
         ptrCtx.moveTo(0.5 * size, 0.168224 * size)
@@ -254,10 +264,10 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
 
       case "type13":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0, 0.5 * size, 0, 0.130841 * size, [
-          { color: lblColor.toRgbaString(), offset: 0 },
-          { color: lblColor.toRgbaString(), offset: 0.85 },
-          { color: ptrColor.medium.toRgbaString(), offset: 0.85 },
-          { color: ptrColor.medium.toRgbaString(), offset: 1 },
+          { color: options.labelColor.toRgbaString(), offset: 0 },
+          { color: options.labelColor.toRgbaString(), offset: 0.85 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0.85 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 1 },
         ])
 
         // Same Path as type14
@@ -275,9 +285,9 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
 
       case "type14":
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0.485981 * size, 0, 0.509345 * size, 0, [
-          { color: ptrColor.veryDark.toRgbaString(), offset: 0 },
-          { color: ptrColor.light.toRgbaString(), offset: 0.5 },
-          { color: ptrColor.veryDark.toRgbaString(), offset: 1 },
+          { color: options.pointerColor.veryDark.toRgbaString(), offset: 0 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0.5 },
+          { color: options.pointerColor.veryDark.toRgbaString(), offset: 1 },
         ])
 
         // Same Path as type13
@@ -298,15 +308,15 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
       // eslint-disable-next-line no-fallthrough
       case "type16":
         // POINTER TYPE16 - Classic without crescent
-        const y1 = (ptrType.type === "type15") ? size * 0.63 : size * 0.621495
+        const y1 = (options.pointerType.type === "type15") ? size * 0.63 : size * 0.621495
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0, 0, 0, y1, [
-          { color: ptrColor.medium.toRgbaString(), offset: 0 },
-          { color: ptrColor.medium.toRgbaString(), offset: 0.388888 },
-          { color: ptrColor.light.toRgbaString(), offset: 0.5 },
-          { color: ptrColor.medium.toRgbaString(), offset: 0.611111 },
-          { color: ptrColor.medium.toRgbaString(), offset: 1 }
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0.388888 },
+          { color: options.pointerColor.light.toRgbaString(), offset: 0.5 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0.611111 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 1 }
         ])
-        ptrCtx.strokeStyle = ptrColor.dark.toRgbaString()
+        ptrCtx.strokeStyle = options.pointerColor.dark.toRgbaString()
 
         ptrCtx.beginPath()
         ptrCtx.moveTo(size * 0.509345, size * 0.457943)
@@ -318,7 +328,7 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
         ptrCtx.bezierCurveTo(size * 0.457943, size * 0.518691, size * 0.471962, size * 0.537383, size * 0.490654, size * 0.542056)
         ptrCtx.bezierCurveTo(size * 0.490654, size * 0.542056, size * 0.490654, size * 0.542056, size * 0.490654, size * 0.542056)
         
-        if (ptrType.type === "type15") {
+        if (options.pointerType.type === "type15") {
           // Crescent
           ptrCtx.lineTo(size * 0.490654, size * 0.57)
           ptrCtx.bezierCurveTo(size * 0.46, size * 0.58, size * 0.46, size * 0.62, size * 0.490654, size * 0.63)
@@ -376,10 +386,10 @@ export function drawPointerImage (ctx: CanvasCtx, size: number, ptrType: Pointer
       /* falls through */
       default:
         ptrCtx.fillStyle = createLinearGradient(ptrCtx, 0, size * 0.471962, 0, size * 0.130841, [
-          { color: ptrColor.veryDark.toRgbaString(), offset: 0 },
-          { color: ptrColor.medium.toRgbaString(), offset: 0.3 },
-          { color: ptrColor.medium.toRgbaString(), offset: 0.59 },
-          { color: ptrColor.veryDark.toRgbaString(), offset: 1 },
+          { color: options.pointerColor.veryDark.toRgbaString(), offset: 0 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0.3 },
+          { color: options.pointerColor.medium.toRgbaString(), offset: 0.59 },
+          { color: options.pointerColor.veryDark.toRgbaString(), offset: 1 },
         ])
 
         ptrCtx.beginPath()
