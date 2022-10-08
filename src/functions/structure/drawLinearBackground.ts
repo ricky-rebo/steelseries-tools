@@ -12,9 +12,20 @@ import { drawRoundedRectangle } from '../../helpers/misc'
 
 const cache: CanvasCache = {}
 
+interface Options {
+  color: BackgroundColorDef
+  width?: number
+  height?: number
+  vertical?: boolean
+}
+
 // TODO docs
-export function drawLinearBackground (ctx: CanvasCtx, color: BackgroundColorDef, width: number, height: number, vertical: boolean) {
-  const CACHE_KEY = `${color.name}${width}${height}${vertical}`
+export function drawLinearBackground (ctx: CanvasCtx, options: Options) {
+  const width = options.width ?? ctx.canvas.width;
+  const height = options.height ?? ctx.canvas.height;
+  const vertical = options.vertical ?? (height > width);
+
+  const CACHE_KEY = `${options.color.name}${width}${height}${vertical}`
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
@@ -34,9 +45,7 @@ export function drawLinearBackground (ctx: CanvasCtx, color: BackgroundColorDef,
       )
     ) - 1
 
-    const cornerRadius = Math.floor(
-      (vertical ? width : height) * 0.028571
-    )
+    const cornerRadius = Math.floor((vertical ? width : height) * 0.028571)
 
     bufferCtx.lineWidth = 0
 
@@ -44,12 +53,12 @@ export function drawLinearBackground (ctx: CanvasCtx, color: BackgroundColorDef,
     drawRoundedRectangle(bufferCtx, frameWidth, frameWidth, width - frameWidth * 2, height - frameWidth * 2, cornerRadius)
 
     // If the backgroundColor is a texture fill it with the texture instead of the gradient
-    switch (color.name) {
+    switch (options.color.name) {
       case "CARBON":
       case "PUNCHED_SHEET":
       case "BRUSHED_METAL":
       case "BRUSHED_STAINLESS":
-        drawTextureBackground(bufferCtx, color, width, height, frameWidth, cornerRadius)
+        drawTextureBackground(bufferCtx, options.color, width, height, frameWidth, cornerRadius)
         break
       
       case "STAINLESS":
@@ -97,9 +106,9 @@ export function drawLinearBackground (ctx: CanvasCtx, color: BackgroundColorDef,
 
       default:
         bufferCtx.fillStyle = createLinearGradient(bufferCtx, 0, frameWidth, 0, height - frameWidth * 2, [
-          { color: color.gradientStart.toRgbaString(), offset: 0 },
-          { color: color.gradientFraction.toRgbaString(), offset: 0.4 },
-          { color: color.gradientStop.toRgbaString(), offset: 1 },
+          { color: options.color.gradientStart.toRgbaString(), offset: 0 },
+          { color: options.color.gradientFraction.toRgbaString(), offset: 0.4 },
+          { color: options.color.gradientStop.toRgbaString(), offset: 1 },
         ])
         bufferCtx.fill()
     }

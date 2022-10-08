@@ -3,8 +3,18 @@ import { createLinearGradient } from '../../helpers/gradients'
 
 const cache: CanvasCache = {}
 
+interface Options {
+  width?: number
+  height?: number
+  vertical?: boolean
+}
+
 // TODO docs
-export function drawLinearForeground (ctx: CanvasCtx, width: number, height: number, vertical: number) {
+export function drawLinearForeground (ctx: CanvasCtx, options?: Options) {
+  const width = options?.width ?? ctx.canvas.width;
+  const height = options?.height ?? ctx.canvas.height;
+  const vertical = options?.vertical ?? (height > width);
+
   const CACHE_KEY = `${width}${height}${vertical}`
 
   // check if we have already created and cached this buffer, if not create it

@@ -7,9 +7,20 @@ import { drawRoundedRectangle } from '../../helpers/misc'
 
 const cache: CanvasCache = {}
 
+interface Options {
+  design: FrameDesignDef
+  width?: number
+  height?: number
+  vertical?: boolean
+}
+
 // TODO doocs
-export const drawLinearFrame = function (ctx: CanvasCtx, frame: FrameDesignDef, width: number, height: number, vertical: boolean) {
-  const CACHE_KEY = `${frame.design}${width}${height}${vertical}`
+export const drawLinearFrame = function (ctx: CanvasCtx, options : Options) {
+  const width = options?.width ?? ctx.canvas.width;
+  const height = options?.height ?? ctx.canvas.height;
+  const vertical = options?.vertical ?? (height > width);
+
+  const CACHE_KEY = `${options.design.design}${width}${height}${vertical}`
   
   let grad
   let fractions = []
@@ -45,7 +56,7 @@ export const drawLinearFrame = function (ctx: CanvasCtx, frame: FrameDesignDef, 
     // Main Gradient
     drawRoundedRectangle(linFCtx, 1, 1, width-2, height-2, mainCornerRadius)
 
-    switch (frame.design) {
+    switch (options.design.design) {
       case 'metal':
         linFCtx.fillStyle = createLinearGradient(linFCtx, 0, width * 0.004672, 0, height * 0.990654, [
           { color: '#fefefe', offset: 0 },

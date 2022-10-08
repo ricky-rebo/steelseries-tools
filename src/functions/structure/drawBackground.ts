@@ -1,7 +1,6 @@
-// import { CarbonBuffer } from '../textures/CarbonBuffer'
-// import { PunchedSheetBuffer } from '../textures/PunchedSheetBuffer'
-
+// JS version | import { CarbonBuffer } from '../textures/CarbonBuffer'
 import CarbonTexture from '../../textures/carbon-texture.svg'
+// JS version | import { PunchedSheetBuffer } from '../textures/PunchedSheetBuffer'
 import PunchedSheetTexture from '../../textures/punchedsheet-texture.svg'
 
 import { BrushedMetalTexture } from '../../textures/BrushedMetalTexture'
@@ -12,57 +11,70 @@ import { TWO_PI, RAD_FACTOR } from "../../shared"
 import { BackgroundColorDef } from "../../model/BackgroundColorDef"
 import { createLinearGradient, createRadialGradient } from '../../helpers/gradients'
 
+interface Options {
+  color: BackgroundColorDef
+  width?: number 
+  height?: number
+  centerX?: number 
+  centerY?: number
+}
+
 const cache: CanvasCache = {}
 
 // TODO docs
-export function drawBackground (ctx: CanvasRenderingContext2D, color: BackgroundColorDef, centerX: number, centerY: number, width: number, height: number) {
-  const CACHE_KEY = `${color.name}${width}${height}`
+export function drawBackground (ctx: CanvasRenderingContext2D, options: Options) {
+  const width = options.width ?? ctx.canvas.width
+  const height = options.height ?? ctx.canvas.height
+
+  const CACHE_KEY = `${options.color.name}${width}${height}`
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
     // Setup buffer
-    const radBBuffer = createBuffer(width, height)
-    const radBCtx = radBBuffer.getContext('2d')
+    const drawBuffer = createBuffer(width, height)
+    const drawCtx = drawBuffer.getContext('2d')
 
-    if (!radBCtx) {
+    if (!drawCtx) {
       throw Error("Unable to get canvas context!")
     }
 
+    const centerX = options.centerX ?? width / 2
+    const centerY = options.centerY ?? height / 2
     const offsetX = (width * 0.831775) / 2
 
     // Background ellipse
-    radBCtx.beginPath()
-    radBCtx.arc(centerX, centerY, offsetX, 0, TWO_PI, true)
-    radBCtx.closePath()
+    drawCtx.beginPath()
+    drawCtx.arc(centerX, centerY, offsetX, 0, TWO_PI, true)
+    drawCtx.closePath()
 
-    switch (color.name) {
+    switch (options.color.name) {
       case "CARBON":
       case "PUNCHED_SHEET":
       case "BRUSHED_METAL":
       case "BRUSHED_STAINLESS":
-        drawTexture (radBCtx, color, width, height, centerX, centerY, offsetX)
+        drawTexture(drawCtx, options.color, width, height, centerX, centerY, offsetX)
         break
       
       case "STAINLESS":
-        drawStainlessBackground(radBCtx, centerX, centerY, offsetX)
+        drawStainlessBackground(drawCtx, centerX, centerY, offsetX)
         break
       
       case "TURNED":
-        drawStainlessBackground(radBCtx, centerX, centerY, offsetX)
-        drawTurnedEffect(radBCtx, centerX, centerY, offsetX)
+        drawStainlessBackground(drawCtx, centerX, centerY, offsetX)
+        drawTurnedEffect(drawCtx, centerX, centerY, offsetX)
         break
 
       default:
-        radBCtx.fillStyle = createLinearGradient(radBCtx, 0, width * 0.084112, 0, offsetX * 2, [
-          { color: color.gradientStart.getRgbaColor(), offset: 0 },
-          { color: color.gradientFraction.getRgbaColor(), offset: 0.4 },
-          { color: color.gradientStop.getRgbaColor(), offset: 1 }
+        drawCtx.fillStyle = createLinearGradient(drawCtx, 0, width * 0.084112, 0, offsetX * 2, [
+          { color: options.color.gradientStart.getRgbaColor(), offset: 0 },
+          { color: options.color.gradientFraction.getRgbaColor(), offset: 0.4 },
+          { color: options.color.gradientStop.getRgbaColor(), offset: 1 }
         ])
-        radBCtx.fill()
+        drawCtx.fill()
     }
 
     // Inner shadow
-    radBCtx.fillStyle = createRadialGradient(radBCtx, centerX, centerY, 0, offsetX, [
+    drawCtx.fillStyle = createRadialGradient(drawCtx, centerX, centerY, 0, offsetX, [
       { color: 'rgba(0, 0, 0, 0)', offset: 0 },
       { color: 'rgba(0, 0, 0, 0)', offset: 0.7 },
       { color: 'rgba(0, 0, 0, 0)', offset: 0.71 },
@@ -72,13 +84,13 @@ export function drawBackground (ctx: CanvasRenderingContext2D, color: Background
       { color: 'rgba(0, 0, 0, 0.3)', offset: 1 }
     ])
 
-    radBCtx.beginPath()
-    radBCtx.arc(centerX, centerY, offsetX, 0, TWO_PI, true)
-    radBCtx.closePath()
-    radBCtx.fill()
+    drawCtx.beginPath()
+    drawCtx.arc(centerX, centerY, offsetX, 0, TWO_PI, true)
+    drawCtx.closePath()
+    drawCtx.fill()
 
     // cache the buffer
-    cache[CACHE_KEY] = radBBuffer
+    cache[CACHE_KEY] = drawBuffer
   }
 
   // Draw cached image

@@ -6,9 +6,18 @@ import { createLinearGradient, createRadialGradient } from "../../helpers/gradie
 
 const cache: CanvasCache = {}
 
+interface Options {
+  type: ForegroundTypeDef,
+  width?: number,
+  height?: number
+}
+
 // TODO docs
-export function drawForeground (ctx: CanvasCtx, foreground: ForegroundTypeDef, width = ctx.canvas.width, height = ctx.canvas.height) {
-  const CACHE_KEY = `${foreground.type}${width}${height}`
+export function drawForeground (ctx: CanvasCtx, options: Options) {
+  const width = options.width ?? ctx.canvas.width;
+  const height = options.height ?? ctx.canvas.height;
+
+  const CACHE_KEY = `${options.type.type}${width}${height}`
   // ${withCenterKnob}${knob?.type ?? "-"}${style?.style ?? "-"}${orientation?.type ?? "-"}
 
   // check if we have already created and cached this buffer, if so return it and exit
@@ -21,8 +30,8 @@ export function drawForeground (ctx: CanvasCtx, foreground: ForegroundTypeDef, w
       throw Error("Unable to get canvas context!")
     }
 
-    fgCtx.fillStyle = createForegroundGradient(fgCtx, foreground, width, height)
-    fgCtx.fill(createForegroundPath(foreground, width, height))
+    fgCtx.fillStyle = createForegroundGradient(fgCtx, options.type, width, height)
+    fgCtx.fill(createForegroundPath(options.type, width, height))
 
     // cache the buffer
     cache[CACHE_KEY] = fgBuffer

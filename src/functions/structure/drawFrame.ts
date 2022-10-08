@@ -7,9 +7,20 @@ import { createLinearGradient, createRadialGradient } from '../../helpers/gradie
 
 const cache: CanvasCache = {}
 
+interface Options {
+  design: FrameDesignDef
+  width?: number
+  height?: number
+  centerX?: number
+  centerY?: number
+}
+
 // TODO docs
-export function drawFrame (ctx: CanvasCtx, frame: FrameDesignDef, centerX: number, centerY: number, width: number, height: number) {
-  const CACHE_KEY = `${frame.design}${width}${height}`
+export function drawFrame (ctx: CanvasCtx, options: Options) {
+  const width = options.width ?? ctx.canvas.width;
+  const height = options.height ?? ctx.canvas.height;
+
+  const CACHE_KEY = `${options.design.design}${width}${height}`
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
@@ -19,6 +30,9 @@ export function drawFrame (ctx: CanvasCtx, frame: FrameDesignDef, centerX: numbe
     if (!radFCtx) {
       throw Error("Unable to get canvas context!")
     }
+
+    const centerX = options.centerX ?? width / 2;
+    const centerY = options.centerY ?? height / 2; 
 
     // outer gray frame
     radFCtx.fillStyle = '#848484'
@@ -35,7 +49,7 @@ export function drawFrame (ctx: CanvasCtx, frame: FrameDesignDef, centerX: numbe
 
     // main gradient frame
     let grad, fractions, colors
-    switch (frame.design) {
+    switch (options.design.design) {
       case 'metal':
         radFCtx.fillStyle = createLinearGradient(radFCtx, 0, width * 0.004672, 0, height * 0.990654, [
           { color: '#fefefe', offset: 0 },
