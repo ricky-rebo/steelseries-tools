@@ -47,5 +47,26 @@ export { LabelNumberFormat } from "./enums/types/LabelNumberFormat";
 export { TickLabelOrientation } from "./enums/types/TickLabelOrientation";
 export { TrendState } from "./enums/types/TrendState";
 
+// Legacy
+export { 
+  OLD__drawLinearTickmarksImage,
+  OLD__drawRadialTickmarksImage,
+  OLD__drawTitleImage
+} from "./functions/data-visualization/legacy";
+export {
+  OLD__createMeasuredValueImage,
+  OLD__createThresholdImage,
+  OLD__drawLinearIndicator,
+  OLD__drawPointerImage,
+} from "./functions/pointers/legacy";
+export {
+  OLD__drawBackgroun,
+  OLD__drawForeground,
+  OLD__drawFrame,
+  OLD__drawLinearBackgroundImage,
+  OLD__drawLinearForegroundImage,
+  OLD__drawLinearFrameImage,
+} from "./functions/structure/legacy";
+
 // Helpers
 // TODO valutare quali helper esportare
