@@ -1,4 +1,5 @@
 import { RgbaColor } from "../model/RgbaColor";
+import { drawToBuffer, range } from "./common";
 
 const INT_TO_FLOAT = 1 / 255;
 
@@ -32,4 +33,41 @@ export function getColorFromFraction(fromColor: RgbaColor, toColor: RgbaColor, r
 
 export function hexToRgba (hexString: string, alpha: number) {
   return RgbaColor.fromHexString(hexString, alpha).toRgbaString()
+}
+
+export function getColorValues (color: string): [number, number, number, number] {
+  const lookupBuffer = drawToBuffer(1, 1, function (ctx) {
+    ctx.fillStyle = color
+    ctx.beginPath()
+    ctx.rect(0, 0, 1, 1)
+    ctx.fill()
+  })
+
+  const colorData = lookupBuffer.getContext('2d')!.getImageData(0, 0, 2, 2).data
+
+  return [colorData[0], colorData[1], colorData[2], colorData[3]]
+}
+
+export function darker (color: RgbaColor, fraction: number) {
+  let red = Math.floor(color.getRed() * (1 - fraction))
+  let green = Math.floor(color.getGreen() * (1 - fraction))
+  let blue = Math.floor(color.getBlue() * (1 - fraction))
+
+  red = range(red, 255)
+  green = range(green, 255)
+  blue = range(blue, 255)
+
+  return new RgbaColor(red, green, blue, color.getAlpha())
+}
+
+export function lighter (color: RgbaColor, fraction: number) {
+  let red = Math.round(color.getRed() * (1 + fraction))
+  let green = Math.round(color.getGreen() * (1 + fraction))
+  let blue = Math.round(color.getBlue() * (1 + fraction))
+
+  red = range(red, 255)
+  green = range(green, 255)
+  blue = range(blue, 255)
+
+  return new RgbaColor(red, green, blue, color.getAlpha())
 }
