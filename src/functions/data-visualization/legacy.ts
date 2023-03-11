@@ -1,3 +1,4 @@
+import { GaugeType } from "../../enums/types/GaugeType"
 import { BackgroundColorDef } from "../../model/BackgroundColorDef"
 import { GaugeTypeDef } from "../../model/GaugeTypeDef"
 import { LabelNumberFormatDef } from "../../model/LabelNumberFormatDef"
@@ -18,7 +19,7 @@ export function drawTitleImage (
   vertical: boolean,
   radial: boolean,
   altPos: boolean,
-  gaugeType: GaugeTypeDef
+  gaugeType: GaugeTypeDef = GaugeType.TYPE1
 ) {
   if (radial) {
     console.warn("[DEPRECATED] OLD__drawTitleImage() function is deprecated! Use drawStrings() instead, for radial gauges")

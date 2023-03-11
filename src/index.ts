@@ -1,9 +1,10 @@
 // Structure Layer
 export { drawFrame } from "./functions/structure/drawFrame"
 export { drawBackground } from "./functions/structure/drawBackground";
+export { drawCustomLayer } from "./functions/structure/drawCustomLayer";
 export { drawForeground } from "./functions/structure/drawForeground"
 export { drawKnob } from "./functions/structure/drawKnob";
-export { drawCustomLayer } from "./functions/structure/drawCustomLayer";
+export { createKnobImage } from "./functions/structure/createKnobImage";
 
 export { drawLinearFrame } from "./functions/structure/drawLinearFrame";
 export { drawLinearBackground } from "./functions/structure/drawLinearBackground";
@@ -18,11 +19,13 @@ export { drawLinearStrings } from "./functions/data-visualization/drawLinearStri
 export { drawLinearTickmarks } from "./functions/data-visualization/drawLinearTickmarks";
 
 // Pointers
-export { createMeasuredValuePointerImage as createMeasuredValueImage } from "./functions/pointers/createMeasuredValuePointerImage";
-export { createThresholdPointerImage as createThresholdImage } from "./functions/pointers/createThresholdPointerImage";
-export { createTrendIndicator } from "./functions/pointers/createTrendIndicator"; // Rimuovere ???
-export { drawLinearIndicator } from "./functions/pointers/drawLinearIndicator"; // Rimuovere ???
+export { createThresholdPointerImage } from "./functions/pointers/createThresholdPointerImage";
 export { drawPointerImage } from "./functions/pointers/drawPointerImage";
+export { createTrendIndicator } from "./functions/pointers/createTrendIndicator"; // Rimuovere ???
+
+// TODO creare un'unica funzione drawIndicator che gestisca sia l'angolo, sia il bordo, sia il bg (gradiente o monocromo)
+export { createMeasuredValuePointerImage } from "./functions/pointers/createMeasuredValuePointerImage";
+export { drawLinearIndicator } from "./functions/pointers/drawLinearIndicator"; // Rimuovere ???
 
 // ***** TO BE REMOVED *****
 export { createLcdBackgroundImage } from "./__to_be_removed/createLcdBackgroundImage";
@@ -32,7 +35,7 @@ export { drawRoseImage } from "./__to_be_removed/drawRoseImage";
 
 // Enums
 export { BackgroundColor } from "./enums/colors/BackgroundColor";
-export { Color, Color as ColorDef } from "./enums/colors/Color"; // TODO remove legacy export ColorDef
+export { Color } from "./enums/colors/Color";
 export { LcdColor } from "./enums/colors/LcdColor";
 export { LedColor } from "./enums/colors/LedColor";
 
@@ -48,7 +51,8 @@ export { TickLabelOrientation } from "./enums/types/TickLabelOrientation";
 export { TrendState } from "./enums/types/TrendState";
 
 // Models
-export { RgbaColor, RgbaColor as rgbaColor } from "./model/RgbaColor" // TODO remove legacy export rgbaColor
+export { RgbaColor } from "./model/RgbaColor";
+export { ColorDef } from "./model/ColorDef";
 
 // Constants
 export * as consts from "./shared"; 

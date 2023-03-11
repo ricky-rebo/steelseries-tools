@@ -1,10 +1,10 @@
-// JS version | import { CarbonBuffer } from '../textures/CarbonBuffer'
-import CarbonTexture from '../../textures/carbon-texture.svg'
-// JS version | import { PunchedSheetBuffer } from '../textures/PunchedSheetBuffer'
-import PunchedSheetTexture from '../../textures/punchedsheet-texture.svg'
+/* JS version | */ import { CarbonBuffer } from '../../textures/CarbonBuffer'
+// import CarbonTexture from '../../textures/carbon-texture.svg'  // FIXME
+/* JS version | */ import { PunchedSheetBuffer } from '../../textures/PunchedSheetBuffer'
+// import PunchedSheetTexture from '../../textures/punchedsheet-texture.svg'  // FIXME
 
 import { BrushedMetalTexture } from '../../textures/BrushedMetalTexture'
-import { createBuffer, prepareTexture, rotateContext } from '../../helpers/common'
+import { createBuffer, /* prepareTexture, */ rotateContext } from '../../helpers/common'
 import { ConicalGradient } from '../../model/ConicalGradient'
 import { RgbaColor } from '../../model/RgbaColor'
 import { TWO_PI, RAD_FACTOR } from "../../shared"
@@ -110,12 +110,12 @@ export function drawBackground (ctx: CanvasRenderingContext2D, options: Options)
  */
 function drawTexture (ctx: CanvasRenderingContext2D, color: BackgroundColorDef, width: number, height: number, centerX: number, centerY: number, offsetX: number) {
   if (color.name === 'CARBON') {
-    // ctx.fillStyle = (ctx.createPattern(CarbonBuffer, 'repeat') as CanvasPattern)
-    ctx.fillStyle = (ctx.createPattern(prepareTexture(CarbonTexture), 'repeat') as CanvasPattern)
+    ctx.fillStyle = (ctx.createPattern(CarbonBuffer, 'repeat') as CanvasPattern)
+    // ctx.fillStyle = (ctx.createPattern(prepareTexture(CarbonTexture), 'repeat') as CanvasPattern) // FIXME
     ctx.fill()
   } else if (color.name === 'PUNCHED_SHEET') {
-    // ctx.fillStyle = (ctx.createPattern(PunchedSheetBuffer, 'repeat') as CanvasPattern)
-    ctx.fillStyle = (ctx.createPattern(prepareTexture(PunchedSheetTexture), 'repeat') as CanvasPattern)
+    ctx.fillStyle = (ctx.createPattern(PunchedSheetBuffer, 'repeat') as CanvasPattern)
+    // ctx.fillStyle = (ctx.createPattern(prepareTexture(PunchedSheetTexture), 'repeat') as CanvasPattern) // FIXME
     ctx.fill()
   }
 

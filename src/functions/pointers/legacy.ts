@@ -9,12 +9,12 @@ import { drawPointerImage as NEW__drawPointerImage } from "./drawPointerImage";
 
 export function createMeasuredValueImage (size: number, indicatorColor: string, radial: boolean, vertical: boolean) {
   console.warn("[DEPRECATED] OLD__createMeasuredValueImage() is deprecated! use createMeasuredValuePointerImage(size, indicatorColor, linear?, vertical?) instead!");
-  createMeasuredValuePointerImage(size, indicatorColor, !radial, vertical);
+  return createMeasuredValuePointerImage(size, indicatorColor, !radial, vertical);
 }
 
 export function createThresholdImage (width: number, height: number, radial: boolean, vertical: boolean) {
   console.warn("[DEPRECATE] OLD__createThresholdImage() is deprecated! Use createThresholdPointerImage(width, height, linear?, vertical?");
-  createThresholdPointerImage(width, height, !radial, vertical);
+  return createThresholdPointerImage(width, height, !radial, vertical);
 }
 
 export function drawLinearIndicator (

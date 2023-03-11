@@ -20,3 +20,6 @@ export {
   drawLinearForegroundImage,
   drawLinearFrameImage,
 } from "./functions/structure/legacy";
+
+export { RgbaColor as rgbaColor } from "./model/RgbaColor";
+export { Color as ColorDef } from "./enums/colors/Color";

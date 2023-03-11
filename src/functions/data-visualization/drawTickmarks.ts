@@ -57,7 +57,7 @@ function drawTickmarks (ctx: CanvasCtx, options: Options) {
 
   let majorTickCounter = MAX_MINOR_TICKS_COUNT - 1
   for (let i = options.minValue; parseFloat(i.toFixed(2)) <= maxValueRounded; i += minorTickSpacing) {
-      majorTickCounter++
+    majorTickCounter++
 
     // Draw major tickmarks
     if (majorTickCounter === MAX_MINOR_TICKS_COUNT) {
