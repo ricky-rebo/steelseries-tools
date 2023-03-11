@@ -8,7 +8,7 @@ import { drawStrings } from "./drawStrings"
 import { drawTickmarkLables } from "./drawTickmarkLables"
 import { drawTickmarks } from "./drawTickmarks"
 
-export function OLD__drawTitleImage (
+export function drawTitleImage (
   ctx: CanvasCtx,
   width: number,
   height: number,
@@ -31,7 +31,7 @@ export function OLD__drawTitleImage (
   }
 }
 
-export function OLD__drawLinearTickmarksImage (
+export function drawLinearTickmarksImage (
   ctx: CanvasCtx,
   width: number,
   height: number, 
@@ -47,7 +47,7 @@ export function OLD__drawLinearTickmarksImage (
   drawLinearTickmarks(ctx, { width, height, gaugeType, backgroundColor: color, labelFormat, minValue, maxValue, niceScale, vertical })
 }
 
-export function OLD__drawRadialTickmarksImage (
+export function drawRadialTickmarksImage (
   ctx: CanvasCtx,
   size: number,
   gaugeType: GaugeTypeDef,

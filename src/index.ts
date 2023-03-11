@@ -32,7 +32,7 @@ export { drawRoseImage } from "./__to_be_removed/drawRoseImage";
 
 // Enums
 export { BackgroundColor } from "./enums/colors/BackgroundColor";
-export { Color as ColorDef } from "./enums/colors/Color";
+export { Color, Color as ColorDef } from "./enums/colors/Color"; // TODO remove legacy export ColorDef
 export { LcdColor } from "./enums/colors/LcdColor";
 export { LedColor } from "./enums/colors/LedColor";
 
@@ -47,26 +47,14 @@ export { LabelNumberFormat } from "./enums/types/LabelNumberFormat";
 export { TickLabelOrientation } from "./enums/types/TickLabelOrientation";
 export { TrendState } from "./enums/types/TrendState";
 
+// Models
+export { RgbaColor, RgbaColor as rgbaColor } from "./model/RgbaColor" // TODO remove legacy export rgbaColor
+
+// Constants
+export * as consts from "./shared"; 
+
 // Legacy
-export { 
-  OLD__drawLinearTickmarksImage,
-  OLD__drawRadialTickmarksImage,
-  OLD__drawTitleImage
-} from "./functions/data-visualization/legacy";
-export {
-  OLD__createMeasuredValueImage,
-  OLD__createThresholdImage,
-  OLD__drawLinearIndicator,
-  OLD__drawPointerImage,
-} from "./functions/pointers/legacy";
-export {
-  OLD__drawBackgroun,
-  OLD__drawForeground,
-  OLD__drawFrame,
-  OLD__drawLinearBackgroundImage,
-  OLD__drawLinearForegroundImage,
-  OLD__drawLinearFrameImage,
-} from "./functions/structure/legacy";
+export * as legacy from "./legacy";
 
 // Helpers
 // TODO valutare quali helper esportare
