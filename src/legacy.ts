@@ -22,4 +22,7 @@ export {
 } from "./functions/structure/legacy";
 
 export { RgbaColor as rgbaColor } from "./model/RgbaColor";
+export { Gradient as gradientWrapper } from "./model/Gradient";
 export { Color as ColorDef } from "./enums/colors/Color";
+
+export { hexToRgba as setAlpha } from "./helpers/colors";

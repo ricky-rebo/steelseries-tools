@@ -52,6 +52,8 @@ export { TrendState } from "./enums/types/TrendState";
 
 // Models
 export { RgbaColor } from "./model/RgbaColor";
+export { Gradient } from "./model/Gradient";
+export { ConicalGradient } from "./model/ConicalGradient";
 export { ColorDef } from "./model/ColorDef";
 
 // Constants
