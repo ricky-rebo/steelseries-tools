@@ -19,17 +19,15 @@ export { drawLinearStrings } from "./functions/data-visualization/drawLinearStri
 export { drawLinearTickmarks } from "./functions/data-visualization/drawLinearTickmarks";
 
 // Pointers
-export { createThresholdPointerImage } from "./functions/pointers/createThresholdPointerImage";
 export { drawPointerImage } from "./functions/pointers/drawPointerImage";
-export { createTrendIndicator } from "./functions/pointers/createTrendIndicator"; // Rimuovere ???
-
-// TODO creare un'unica funzione drawIndicator che gestisca sia l'angolo, sia il bordo, sia il bg (gradiente o monocromo)
-export { createMeasuredValuePointerImage } from "./functions/pointers/createMeasuredValuePointerImage";
+export { createIndicatorImage } from "./functions/pointers/createIndicatorImage";
 export { drawLinearIndicator } from "./functions/pointers/drawLinearIndicator"; // Rimuovere ???
+
 
 // ***** TO BE REMOVED *****
 export { createLcdBackgroundImage } from "./__to_be_removed/createLcdBackgroundImage";
 export { createLedImage } from "./__to_be_removed/createLedImage";
+export { createTrendIndicator } from "./__to_be_removed/createTrendIndicator";
 export { drawActiveBargraphLed } from "./__to_be_removed/drawActiveBargraphLed";
 export { drawRoseImage } from "./__to_be_removed/drawRoseImage";
 
@@ -54,7 +52,22 @@ export { TrendState } from "./enums/types/TrendState";
 export { RgbaColor } from "./model/RgbaColor";
 export { Gradient } from "./model/Gradient";
 export { ConicalGradient } from "./model/ConicalGradient";
+
 export { ColorDef } from "./model/ColorDef";
+export { BackgroundColorDef } from "./model/BackgroundColorDef";
+export { LcdColorDef } from "./model/LcdColorDef";
+export { LedColorDef } from "./model/LedColorDef";
+
+export { FrameDesignDef } from "./model/FrameDesignDef";
+export { ForegroundTypeDef } from "./model/ForegroundTypeDef";
+export { GaugeTypeDef } from "./model/GaugeTypeDef";
+export { KnobTypeDef } from "./model/KnobTypeDef";
+export { KnobStyleDef } from "./model/KnobStyleDef";
+export { LabelNumberFormatDef } from "./model/LabelNumberFormatDef";
+export { OrientationDef } from "./model/OrientationDef";
+export { PointerTypeDef } from "./model/PointerTypeDef";
+export { TickLabelOrientationDef } from "./model/TickLabelOrientationDef";
+export { TrendStateDef } from "./model/TrendStateDef";
 
 // Constants
 export * as consts from "./shared"; 

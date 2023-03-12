@@ -1,4 +1,4 @@
-type ColorStop = { offset: number, color: string }
+export type ColorStop = { offset: number, color: string }
 
 // TODO internal docs
 export function createLinearGradient(ctx: CanvasCtx, x0: number, y0: number, x1: number, y1: number, colorStops: ColorStop[]) {

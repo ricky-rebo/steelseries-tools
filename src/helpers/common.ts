@@ -55,16 +55,16 @@ export function drawToBuffer (width: number, height: number, drawFunction: DrawF
 }
 
 export function rotateContext (ctx: CanvasRenderingContext2D, angle: number, centerX = ctx.canvas.width/2, centerY = ctx.canvas.height/2) {
-  // const centerX = ctx.canvas.width / 2
-  // const centerY = ctx.canvas.height / 2
-
   ctx.translate(centerX, centerY)
   ctx.rotate(angle)
   ctx.translate(-centerX, -centerY)
 }
 
-export function prepareTexture (svg: string) {
-  const texture = new Image()
-  texture.src = `data:image/svg+xml;base64,${window.btoa(svg)}`
-  return texture
+export function prepareTexture (svg: string): HTMLImageElement {
+  const buffer = Buffer.from(svg, 'utf-8').toString('base64');
+
+  const texture = new Image();
+  texture.src = `data:image/svg+xml;base64,${buffer}`;
+
+  return texture;
 }

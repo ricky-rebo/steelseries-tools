@@ -1,7 +1,7 @@
 /* JS version | */ import { CarbonBuffer } from '../../textures/CarbonBuffer'
-// import CarbonTexture from '../../textures/carbon-texture.svg'  // FIXME
+// import CarbonTexture from '../../textures/carbon-texture.svg' // FIXME sometimes doesn't draw because of async img loading
 /* JS version | */ import { PunchedSheetBuffer } from '../../textures/PunchedSheetBuffer'
-// import PunchedSheetTexture from '../../textures/punchedsheet-texture.svg'  // FIXME
+// import PunchedSheetTexture from '../../textures/punchedsheet-texture.svg' // FIXME sometimes doesn't draw because of async img loading
 
 import { BrushedMetalTexture } from '../../textures/BrushedMetalTexture'
 import { createBuffer, /* prepareTexture, */ rotateContext } from '../../helpers/common'
@@ -109,14 +109,26 @@ export function drawBackground (ctx: CanvasRenderingContext2D, options: Options)
  * @param offsetX X axis offset
  */
 function drawTexture (ctx: CanvasRenderingContext2D, color: BackgroundColorDef, width: number, height: number, centerX: number, centerY: number, offsetX: number) {
-  if (color.name === 'CARBON') {
-    ctx.fillStyle = (ctx.createPattern(CarbonBuffer, 'repeat') as CanvasPattern)
-    // ctx.fillStyle = (ctx.createPattern(prepareTexture(CarbonTexture), 'repeat') as CanvasPattern) // FIXME
+  const texture = (function () {
+    switch (color.name) {
+      case 'CARBON':
+        // return prepareTexture(CarbonTexture);
+        return CarbonBuffer;
+      case 'PUNCHED_SHEET':
+        // return prepareTexture(PunchedSheetTexture);
+        return PunchedSheetBuffer;
+      default:
+        return null;
+    }
+  })();
+
+  if (texture) {
+    ctx.fillStyle = (ctx.createPattern(texture, 'repeat') as CanvasPattern)
     ctx.fill()
-  } else if (color.name === 'PUNCHED_SHEET') {
-    ctx.fillStyle = (ctx.createPattern(PunchedSheetBuffer, 'repeat') as CanvasPattern)
-    // ctx.fillStyle = (ctx.createPattern(prepareTexture(PunchedSheetTexture), 'repeat') as CanvasPattern) // FIXME
-    ctx.fill()
+    // texture.onload = function () {
+    //   ctx.fillStyle = (ctx.createPattern(this as HTMLImageElement, 'repeat') as CanvasPattern) // FIXME
+    //   ctx.fill()
+    // };
   }
 
   // Add another inner shadow to make the look more realistic

@@ -1,9 +1,9 @@
-import { LedColorDef } from "../../model/LedColorDef"
-import { TrendStateDef } from "../../model/TrendStateDef"
-import { hexToRgba } from '../../helpers/colors'
-import { createBuffer } from '../../helpers/common'
-import { TWO_PI } from '../../shared'
-import { createLinearGradient, createRadialGradient } from '../../helpers/gradients'
+import { LedColorDef } from "../model/LedColorDef"
+import { TrendStateDef } from "../model/TrendStateDef"
+import { hexToRgba } from '../helpers/colors'
+import { createBuffer } from '../helpers/common'
+import { TWO_PI } from '../shared'
+import { createLinearGradient, createRadialGradient } from '../helpers/gradients'
 
 const cache: CanvasCache = {}
 
