@@ -1,9 +1,11 @@
+import { createCanvas } from "canvas-drawing-tools"
+
 import { LedColorDef } from "../model/LedColorDef"
 import { TrendStateDef } from "../model/TrendStateDef"
 import { hexToRgba } from '../helpers/colors'
-import { createBuffer } from '../helpers/common'
 import { TWO_PI } from '../shared'
 import { createLinearGradient, createRadialGradient } from '../helpers/gradients'
+
 
 const cache: CanvasCache = {}
 
@@ -16,7 +18,7 @@ export function createTrendIndicator (width: number, trendState: TrendStateDef, 
     const height = width * 2
 
     // create oversized buffer for the glow
-    const trendBuffer = createBuffer(width * 2, width * 4)
+    const trendBuffer = createCanvas(width * 2, width * 4)
     const trendCtx = trendBuffer.getContext('2d')
 
     if (!trendCtx) {

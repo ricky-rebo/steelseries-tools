@@ -1,5 +1,6 @@
+import { drawToCanvas } from "canvas-drawing-tools";
+
 import { getRawColorFromFraction } from "../helpers/colors"
-import { drawToBuffer } from "../helpers/common"
 import { PI, TWO_PI } from "../shared"
 import { RgbaColor } from "./RgbaColor"
 
@@ -60,13 +61,8 @@ export class ConicalGradient {
       }
     }
 
-    // Create a new buffer to apply the raw data so we can rotate it
-    // const buffer = createBuffer(diameter, diameter)
-    // const bufferCtx = buffer.getContext('2d')
-    // bufferCtx.putImageData(pixels, 0, 0)
-    
     // Apply the image buffer
-    const buffer = drawToBuffer(diameter, diameter, (_ctx) => { _ctx.putImageData(pixels, 0, 0) })
+    const buffer = drawToCanvas(diameter, diameter, (_ctx) => { _ctx.putImageData(pixels, 0, 0) })
     ctx.drawImage(buffer, centerX - radius, centerY - radius)
   }
 
@@ -122,12 +118,9 @@ export class ConicalGradient {
       }
     }
     // Create a new buffer to apply the raw data so we can clip it when drawing to canvas
-    // const buffer = createBuffer(width, height)
-    // const bufferCtx = buffer.getContext('2d')
-    // bufferCtx.putImageData(pixels, 0, 0)
+    const buffer = drawToCanvas(width, height, (_ctx) => { _ctx.putImageData(pixels, 0, 0) })
 
     // draw the buffer back to the canvas
-    const buffer = drawToBuffer(width, height, (_ctx) => { _ctx.putImageData(pixels, 0, 0) })
     ctx.drawImage(buffer, centerX - width2, centerY - height2)
   }
 }

@@ -1,9 +1,9 @@
+import { createCanvas, createLinearGradient, createRadialGradient } from "canvas-drawing-tools"
+
 import { FrameDesignDef } from "../../model/FrameDesignDef"
 import { ConicalGradient } from '../../model/ConicalGradient'
 import { RgbaColor } from '../../model/RgbaColor'
-import { createBuffer } from '../../helpers/common'
 import { TWO_PI } from "../../shared"
-import { createLinearGradient, createRadialGradient } from '../../helpers/gradients'
 
 const cache: CanvasCache = {}
 
@@ -24,7 +24,7 @@ export function drawFrame (ctx: CanvasCtx, options: Options) {
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
-    const radFBuffer = createBuffer(width, height)
+    const radFBuffer = createCanvas(width, height)
     const radFCtx = radFBuffer.getContext('2d')
 
     if (!radFCtx) {

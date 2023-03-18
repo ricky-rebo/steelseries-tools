@@ -1,8 +1,8 @@
+import { createCanvas, createLinearGradient } from 'canvas-drawing-tools'
+
 import { RgbaColor } from '../../model/RgbaColor'
 import { ConicalGradient } from '../../model/ConicalGradient'
 import { FrameDesignDef } from "../../model/FrameDesignDef"
-import { createBuffer } from '../../helpers/common'
-import { createLinearGradient } from '../../helpers/gradients'
 import { drawRoundedRectangle } from '../../helpers/misc'
 
 const cache: CanvasCache = {}
@@ -29,7 +29,7 @@ export const drawLinearFrame = function (ctx: CanvasCtx, options : Options) {
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
     // Setup buffer
-    const linFBuffer = createBuffer(width, height)
+    const linFBuffer = createCanvas(width, height)
     const linFCtx = linFBuffer.getContext('2d')
 
     if (!linFCtx) {

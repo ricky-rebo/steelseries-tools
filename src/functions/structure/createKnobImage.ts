@@ -1,8 +1,8 @@
+import { createCanvas } from "canvas-drawing-tools"
+
 import { KnobStyleDef } from "../../model/KnobStyleDef"
 import { KnobTypeDef } from "../../model/KnobTypeDef"
-import { createBuffer } from '../../helpers/common'
 import { TWO_PI } from '../../shared'
-// import { drawMetalKnobImage, drawStandardKnobImage } from '../draw/knob'
 
 const cache: CanvasCache = {}
 
@@ -13,7 +13,7 @@ export function createKnobImage (size: number, knobType: KnobTypeDef, knobStyle:
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
-    const knobBuffer = createBuffer(size * 1.18889, size * 1.18889)
+    const knobBuffer = createCanvas(size * 1.18889, size * 1.18889)
     const knobCtx = knobBuffer.getContext('2d')
 
     if (!knobCtx) {
@@ -48,6 +48,7 @@ function createStandardKnobImage(ctx: CanvasRenderingContext2D, size: number, kn
   ctx.arc(maxPostCenterX, maxPostCenterY, size / 2, 0, TWO_PI, true);
   ctx.closePath();
 
+  // TODO use createLinearGradient() tool
   grad = ctx.createLinearGradient(0, 0, 0, size);
   grad.addColorStop(0, 'rgb(180, 180, 180)');
   grad.addColorStop(0.46, 'rgb(63, 63, 63)');

@@ -1,9 +1,10 @@
+import { createCanvas, createLinearGradient, createRadialGradient } from "canvas-drawing-tools"
+
 import { ColorDef } from "../../model/ColorDef"
 import { PointerTypeDef } from "../../model/PointerTypeDef"
-import { createBuffer } from "../../helpers/common"
 import { TWO_PI } from "../../shared"
-import { createLinearGradient, createRadialGradient } from "../../helpers/gradients"
 import { RgbaColor } from "../../model/RgbaColor"
+
 
 interface Options {
   size: number
@@ -23,7 +24,7 @@ export function drawPointerImage (ctx: CanvasCtx, options: Options) {
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
-    const ptrBuffer = createBuffer(size, size)
+    const ptrBuffer = createCanvas(size, size)
     const ptrCtx = ptrBuffer.getContext("2d")
 
     if (!ptrCtx) {

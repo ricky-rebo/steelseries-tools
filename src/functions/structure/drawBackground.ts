@@ -1,16 +1,15 @@
+import { createCanvas, rotateContext, createLinearGradient, createRadialGradient } from "canvas-drawing-tools"
+
 /* JS version | */ import { CarbonBuffer } from '../../textures/CarbonBuffer'
 // import CarbonTexture from '../../textures/carbon-texture.svg' // FIXME sometimes doesn't draw because of async img loading
 /* JS version | */ import { PunchedSheetBuffer } from '../../textures/PunchedSheetBuffer'
 // import PunchedSheetTexture from '../../textures/punchedsheet-texture.svg' // FIXME sometimes doesn't draw because of async img loading
 
 import { BrushedMetalTexture } from '../../textures/BrushedMetalTexture'
-import { createBuffer, /* prepareTexture, */ rotateContext } from '../../helpers/common'
 import { ConicalGradient } from '../../model/ConicalGradient'
 import { RgbaColor } from '../../model/RgbaColor'
 import { TWO_PI, RAD_FACTOR } from "../../shared"
 import { BackgroundColorDef } from "../../model/BackgroundColorDef"
-import { createLinearGradient, createRadialGradient } from '../../helpers/gradients'
-
 interface Options {
   color: BackgroundColorDef
   width?: number 
@@ -31,7 +30,7 @@ export function drawBackground (ctx: CanvasRenderingContext2D, options: Options)
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
     // Setup buffer
-    const drawBuffer = createBuffer(width, height)
+    const drawBuffer = createCanvas(width, height)
     const drawCtx = drawBuffer.getContext('2d')
 
     if (!drawCtx) {

@@ -1,9 +1,11 @@
+import { drawToCanvas } from "canvas-drawing-tools";
+
 import { RgbaColor } from "../model/RgbaColor";
-import { drawToBuffer, range } from "./common";
+import { range } from "./common";
 
 const INT_TO_FLOAT = 1 / 255;
 
-export function getRawColorFromFraction(fromColor: RgbaColor, toColor: RgbaColor, range: number, fraction: number) {
+export function getRawColorFromFraction(fromColor: RgbaColor, toColor: RgbaColor, range: number, fraction: number): RawColorData {
   const sourceRed = fromColor.getRed();
   const sourceGreen = fromColor.getGreen();
   const sourceBlue = fromColor.getBlue();
@@ -36,7 +38,7 @@ export function hexToRgba (hexString: string, alpha: number) {
 }
 
 export function getColorValues (color: string): [number, number, number, number] {
-  const lookupBuffer = drawToBuffer(1, 1, function (ctx) {
+  const lookupBuffer = drawToCanvas(1, 1, function (ctx) {
     ctx.fillStyle = color
     ctx.beginPath()
     ctx.rect(0, 0, 1, 1)

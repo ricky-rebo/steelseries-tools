@@ -1,3 +1,5 @@
+import { RgbaColor } from "./model/RgbaColor";
+
 export { 
   drawLinearTickmarksImage,
   drawRadialTickmarksImage,
@@ -25,4 +27,6 @@ export { RgbaColor as rgbaColor } from "./model/RgbaColor";
 export { Gradient as gradientWrapper } from "./model/Gradient";
 export { Color as ColorDef } from "./enums/colors/Color";
 
-export { hexToRgba as setAlpha } from "./helpers/colors";
+export function setAlpha (hexString: string, alpha: number) {
+  return RgbaColor.fromHexString(hexString, alpha).toRgbaString()
+}

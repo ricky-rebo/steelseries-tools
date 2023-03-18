@@ -1,6 +1,7 @@
+import { createCanvas } from "canvas-drawing-tools"
+
 import { LcdColorDef } from "../model/LcdColorDef"
 import { drawRoundedRectangle } from '../helpers/misc'
-import { createBuffer } from '../helpers/common'
 
 const cache: CanvasCache = {}
 
@@ -10,7 +11,7 @@ export function createLcdBackgroundImage (width: number, height: number, lcdColo
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
-    const lcdBuffer = createBuffer(width, height)
+    const lcdBuffer = createCanvas(width, height)
     const lcdCtx = lcdBuffer.getContext('2d')
     let grad
 

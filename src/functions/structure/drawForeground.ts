@@ -1,8 +1,6 @@
-// import { createKnobImage } from "../create/createKnobImage"
-// import { GaugeType, Orientation } from "../customization/types"
-import { ForegroundTypeDef /* , GaugeTypeDef, KnobStyleDef, KnobTypeDef, OrientationDef */ } from "../../model/ForegroundTypeDef"
-import { createBuffer } from "../../helpers/common"
-import { createLinearGradient, createRadialGradient } from "../../helpers/gradients"
+import { createCanvas, createLinearGradient, createRadialGradient } from "canvas-drawing-tools"
+
+import { ForegroundTypeDef } from "../../model/ForegroundTypeDef"
 
 const cache: CanvasCache = {}
 
@@ -23,7 +21,7 @@ export function drawForeground (ctx: CanvasCtx, options: Options) {
   // check if we have already created and cached this buffer, if so return it and exit
   if (!(CACHE_KEY in cache)) {
     // Setup buffer
-    const fgBuffer = createBuffer(width, height)
+    const fgBuffer = createCanvas(width, height)
     const fgCtx = fgBuffer.getContext("2d")
 
     if (!fgCtx) {

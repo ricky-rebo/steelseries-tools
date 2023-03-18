@@ -1,4 +1,6 @@
-import { createBuffer, range } from '../helpers/common'
+import { createCanvas } from 'canvas-drawing-tools'
+
+import { range } from '../helpers/common'
 import { PI } from "../shared"
 import { RgbaColor } from '../model/RgbaColor'
 
@@ -127,7 +129,7 @@ export class BrushedMetalTexture {
     const height = endY - startY
 
     // Create output canvas
-    const outCanvas = createBuffer(width, height)
+    const outCanvas = createCanvas(width, height)
     const outCanvasContext = outCanvas.getContext('2d')
 
     // ERROR CHECK

@@ -10,9 +10,6 @@
     "dist",
     "src"
   ],
-  "peerDependencies": {
-    "react": ">=16"
-  },
   "engines": {
     "node": ">=12"
   },
@@ -49,6 +46,12 @@
       "limit": "10 KB"
     }
   ],
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "dependencies": {
+    "canvas-drawing-tools": "file:../canvas-drawing-tools"
+  },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^7.0.8",
     "@tsconfig/create-react-app": "^1.0.2",

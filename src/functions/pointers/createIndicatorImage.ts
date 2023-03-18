@@ -1,5 +1,4 @@
-import { createBuffer, rotateContext } from "../../helpers/common";
-import { ColorStop, createLinearGradient } from "../../helpers/gradients";
+import { createCanvas, rotateContext, createLinearGradient } from "canvas-drawing-tools";
 
 const cache: CanvasCache = {};
 
@@ -7,16 +6,16 @@ type Options = {
   angle?: number,
   border?: string,
 } & (
-  { background: 'mono', color: any } 
+  { background: 'mono', color: CanvasFillStrokeStyles["fillStyle"] } 
   | 
-  { background: 'gradient', colorStops: ColorStop[] }
+  { background: 'gradient', colorStops: Parameters<typeof createLinearGradient>["5"] }
 )
 
 export function createIndicatorImage(width: number, height: number, options: Options) {
   const CACHE_KEY = `${width}${height}${JSON.stringify(options)}`;
 
   if (!(CACHE_KEY in cache)) {
-    const buffer = createBuffer(width, height)
+    const buffer = createCanvas(width, height)
     const ctx = buffer.getContext('2d')
 
     if (!ctx) {

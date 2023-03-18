@@ -1,7 +1,7 @@
-import { drawToBuffer } from "../helpers/common"
+import { drawToCanvas } from "canvas-drawing-tools";
 
 // TODO docs
-export const PunchedSheetBuffer = drawToBuffer(15, 15, function(ctx) {
+export const PunchedSheetBuffer = drawToCanvas(15, 15, function(ctx) {
   const width = ctx.canvas.width
   const height = ctx.canvas.height
   let grad

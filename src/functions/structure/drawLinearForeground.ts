@@ -1,5 +1,4 @@
-import { createBuffer } from '../../helpers/common'
-import { createLinearGradient } from '../../helpers/gradients'
+import { createCanvas, createLinearGradient } from 'canvas-drawing-tools'
 
 const cache: CanvasCache = {}
 
@@ -19,7 +18,7 @@ export function drawLinearForeground (ctx: CanvasCtx, options?: Options) {
 
   // check if we have already created and cached this buffer, if not create it
   if (!(CACHE_KEY in cache)) {
-    const linFgBuffer = createBuffer(width, height)
+    const linFgBuffer = createCanvas(width, height)
     const linFgCtx = linFgBuffer.getContext('2d')
 
     if (!linFgCtx) {
