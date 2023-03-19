@@ -10,6 +10,7 @@ export { drawLinearFrame } from "./functions/structure/drawLinearFrame";
 export { drawLinearBackground } from "./functions/structure/drawLinearBackground";
 export { drawLinearForeground } from "./functions/structure/drawLinearForeground";
 
+
 // Data Visualization Layer
 export { drawStrings } from "./functions/data-visualization/drawStrings";
 export { drawTickmarks } from "./functions/data-visualization/drawTickmarks";
@@ -18,18 +19,12 @@ export { drawTickmarkLables } from "./functions/data-visualization/drawTickmarkL
 export { drawLinearStrings } from "./functions/data-visualization/drawLinearStrings";
 export { drawLinearTickmarks } from "./functions/data-visualization/drawLinearTickmarks";
 
+
 // Pointers
 export { drawPointerImage } from "./functions/pointers/drawPointerImage";
 export { createIndicatorImage } from "./functions/pointers/createIndicatorImage";
 export { drawLinearIndicator } from "./functions/pointers/drawLinearIndicator"; // Rimuovere ???
 
-
-// ***** TO BE REMOVED *****
-export { createLcdBackgroundImage } from "./__to_be_removed/createLcdBackgroundImage";
-export { createLedImage } from "./__to_be_removed/createLedImage";
-export { createTrendIndicator } from "./__to_be_removed/createTrendIndicator";
-export { drawActiveBargraphLed } from "./__to_be_removed/drawActiveBargraphLed";
-export { drawRoseImage } from "./__to_be_removed/drawRoseImage";
 
 // Enums
 export { BackgroundColor } from "./enums/colors/BackgroundColor";
@@ -47,6 +42,7 @@ export { ForegroundType } from "./enums/types/ForegroundType";
 export { LabelNumberFormat } from "./enums/types/LabelNumberFormat";
 export { TickLabelOrientation } from "./enums/types/TickLabelOrientation";
 export { TrendState } from "./enums/types/TrendState";
+
 
 // Models
 export { RgbaColor } from "./model/RgbaColor";
@@ -69,11 +65,14 @@ export { PointerTypeDef } from "./model/PointerTypeDef";
 export { TickLabelOrientationDef } from "./model/TickLabelOrientationDef";
 export { TrendStateDef } from "./model/TrendStateDef";
 
+
 // Constants
 export * as consts from "./shared"; 
 
+
 // Legacy
 export * as legacy from "./legacy";
+
 
 // Helpers
 // TODO valutare quali helper esportare

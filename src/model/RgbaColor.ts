@@ -23,7 +23,7 @@ export class RgbaColor {
     return new RgbaColor(red, green, blue, alpha)
   }
 
-  static fromRawColor(rawColorData: number[]) {
+  static fromRawColor(rawColorData: RawColorData) {
     const alpha = rawColorData.length > 3 ? rawColorData[3] : 255
 
     return new RgbaColor(rawColorData[0], rawColorData[1], rawColorData[2], alpha)
@@ -65,17 +65,24 @@ export class RgbaColor {
     return this
   }
 
-  toRgbaString () {
-    return `rgba(${this.#red}, ${this.#green}, ${this.#blue}, ${this.#alpha})`
+  toRgbaString (): RgbaColorString {
+    return `rgba(${this.#red},${this.#green},${this.#blue},${this.#alpha})`
   }
+
+  /**
+   * @deprecated use `toRgbaString()` instead!
+   */
   getRgbaColor () {
-    // TODO print deprecation warning
     return this.toRgbaString()
   }
 
-  toRgbString () {
-    return `rgb(${this.#red}, ${this.#green}, ${this.#blue})`
+  toRgbString (): RgbColorString {
+    return `rgb(${this.#red},${this.#green},${this.#blue})`
   }
+
+  /**
+   * @deprecated use `toRgbString()` insetad!
+   */
   getRgbColor () {
     // TODO print deprecation warning
     return this.toRgbString()
@@ -84,6 +91,10 @@ export class RgbaColor {
   toHexString () {
     return `#${this.#red.toString(16)}${this.#green.toString(16)}${this.#blue.toString(16)}`
   }
+
+  /**
+   * @deprecated use `toHexString()` instead!
+   */
   getHexColor () {
     // TODO print deprecation warning
     return this.toHexString()

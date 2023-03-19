@@ -33,10 +33,6 @@ export function getColorFromFraction(fromColor: RgbaColor, toColor: RgbaColor, r
   return RgbaColor.fromRawColor(getRawColorFromFraction(fromColor, toColor, range, fraction));
 }
 
-export function hexToRgba (hexString: string, alpha: number) {
-  return RgbaColor.fromHexString(hexString, alpha).toRgbaString()
-}
-
 export function getColorValues (color: string): [number, number, number, number] {
   const lookupBuffer = drawToCanvas(1, 1, function (ctx) {
     ctx.fillStyle = color
