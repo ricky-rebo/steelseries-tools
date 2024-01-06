@@ -2,7 +2,7 @@ import { createLinearGradient } from "canvas-drawing-tools";
 import { DrawOptions } from "./FrameDesignModel";
 import GradientFrameDesignModel from "./GradientFrameDesignModel";
 
-export default class GoldFrameDesignModel extends GradientFrameDesignModel {
+export default class GoldFrameDesign extends GradientFrameDesignModel {
   constructor() {
     super("gold");
   }

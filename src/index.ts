@@ -40,6 +40,8 @@ export { LabelNumberFormat } from "./enums/types/LabelNumberFormat";
 export { TickLabelOrientation } from "./enums/types/TickLabelOrientation";
 export { TrendState } from "./enums/types/TrendState";
 
+// TODO aggiungere nuove implementazioni
+
 // Models
 export { RgbaColor } from "./model/RgbaColor";
 export { Gradient } from "./model/Gradient";

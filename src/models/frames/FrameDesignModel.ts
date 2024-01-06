@@ -14,5 +14,5 @@ export default abstract class FrameDesignModel {
     this.design = name; // legacy
   }
 
-  abstract draw (ctx: CanvasRenderingContext2D, options: DrawOptions): void;
+  abstract draw(ctx: CanvasRenderingContext2D, options: DrawOptions): void;
 }

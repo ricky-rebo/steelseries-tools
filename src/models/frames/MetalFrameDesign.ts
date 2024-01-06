@@ -3,12 +3,12 @@ import { createLinearGradient } from "canvas-drawing-tools";
 import GradientFrameDesignModel from "./GradientFrameDesignModel";
 import { DrawOptions } from "./FrameDesignModel";
 
-export default class MetalFrameDesignModel extends GradientFrameDesignModel {
+export default class MetalFrameDesign extends GradientFrameDesignModel {
   constructor() {
-    super('metal');
+    super("metal");
   }
 
-  protected drawGradient(ctx: CanvasRenderingContext2D, { width, height }: Required<DrawOptions>): void{
+  protected drawGradient(ctx: CanvasRenderingContext2D, { width, height }: Required<DrawOptions>): void {
     ctx.fillStyle = createLinearGradient(ctx, 0, width * 0.004672, 0, height * 0.990654, [
       { color: "#fefefe", offset: 0 },
       { color: "#d2d2d2", offset: 0.07 },
@@ -18,5 +18,4 @@ export default class MetalFrameDesignModel extends GradientFrameDesignModel {
 
     ctx.fill();
   }
-
 }
