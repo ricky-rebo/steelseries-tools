@@ -1,4 +1,6 @@
 export class KnobStyleDef {
   style: string;
-  constructor(style: string) { this.style = style; }
+  constructor(style: string) {
+    this.style = style;
+  }
 }

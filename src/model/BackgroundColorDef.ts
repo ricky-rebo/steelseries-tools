@@ -8,7 +8,14 @@ export class BackgroundColorDef {
   symbolColor: RgbaColor;
   name: string;
 
-  constructor(gradStart: RgbaColor, gradFraction: RgbaColor, gradStop: RgbaColor, labelColor: RgbaColor, symbolColor: RgbaColor, name: string) {
+  constructor(
+    gradStart: RgbaColor,
+    gradFraction: RgbaColor,
+    gradStop: RgbaColor,
+    labelColor: RgbaColor,
+    symbolColor: RgbaColor,
+    name: string
+  ) {
     this.gradientStart = gradStart;
     this.gradientFraction = gradFraction;
     this.gradientStop = gradStop;

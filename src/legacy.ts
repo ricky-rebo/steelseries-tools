@@ -1,9 +1,9 @@
 import { RgbaColor } from "./model/RgbaColor";
 
-export { 
+export {
   drawLinearTickmarksImage,
   drawRadialTickmarksImage,
-  drawTitleImage
+  drawTitleImage,
 } from "./functions/data-visualization/legacy";
 
 export {
@@ -27,6 +27,6 @@ export { RgbaColor as rgbaColor } from "./model/RgbaColor";
 export { Gradient as gradientWrapper } from "./model/Gradient";
 export { Color as ColorDef } from "./enums/colors/Color";
 
-export function setAlpha (hexString: string, alpha: number) {
-  return RgbaColor.fromHexString(hexString, alpha).toRgbaString()
+export function setAlpha(hexString: string, alpha: number) {
+  return RgbaColor.fromHexString(hexString, alpha).toRgbaString();
 }

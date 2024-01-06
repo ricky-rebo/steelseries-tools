@@ -9,7 +9,14 @@ export class ColorDef {
   lighter: RgbaColor;
   veryLight: RgbaColor;
 
-  constructor(veryDark: RgbaColor, dark: RgbaColor, medium: RgbaColor, light: RgbaColor, lighter: RgbaColor, veryLight: RgbaColor) {
+  constructor(
+    veryDark: RgbaColor,
+    dark: RgbaColor,
+    medium: RgbaColor,
+    light: RgbaColor,
+    lighter: RgbaColor,
+    veryLight: RgbaColor
+  ) {
     this.veryDark = veryDark;
     this.dark = dark;
     this.medium = medium;
@@ -19,8 +26,8 @@ export class ColorDef {
   }
 
   static fromColorString(color: string) {
-    const values = getColorValues(color)
-    const rgbaCol = new RgbaColor(values[0], values[1], values[2], values[3])
+    const values = getColorValues(color);
+    const rgbaCol = new RgbaColor(values[0], values[1], values[2], values[3]);
 
     return new ColorDef(
       darker(rgbaCol, 0.32),

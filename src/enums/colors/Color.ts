@@ -1,4 +1,4 @@
-import { RgbaColor } from '../../model/RgbaColor';
+import { RgbaColor } from "../../model/RgbaColor";
 import { ColorDef } from "../../model/ColorDef";
 
 export const Color = {
@@ -105,5 +105,5 @@ export const Color = {
     new RgbaColor(129, 206, 0, 1),
     new RgbaColor(190, 231, 141, 1),
     new RgbaColor(234, 247, 218, 1)
-  )
+  ),
 };

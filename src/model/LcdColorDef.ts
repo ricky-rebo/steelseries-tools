@@ -6,7 +6,14 @@ export class LcdColorDef {
   gradientStopColor: string;
   textColor: string;
 
-  constructor(gradStartColor: string, gradFraction1Color: string, gradFraction2Color: string, gradFraction3Color: string, gradStopColor: string, textColor: string) {
+  constructor(
+    gradStartColor: string,
+    gradFraction1Color: string,
+    gradFraction2Color: string,
+    gradFraction3Color: string,
+    gradStopColor: string,
+    textColor: string
+  ) {
     this.gradientStartColor = gradStartColor;
     this.gradientFraction1Color = gradFraction1Color;
     this.gradientFraction2Color = gradFraction2Color;

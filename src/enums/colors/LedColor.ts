@@ -1,4 +1,4 @@
-import { LedColorDef } from "../../model/LedColorDef"
+import { LedColorDef } from "../../model/LedColorDef";
 
 export const LedColor = {
   RED_LED: new LedColorDef("#FF9A89", "#FF9A89", "#FF3300", "#FF8D70", "#7E1C00", "#7E1C00", "#641B00"),
@@ -8,4 +8,4 @@ export const LedColor = {
   YELLOW_LED: new LedColorDef("#FFFF62", "#FFFF62", "#FFFF00", "#FFFF00", "#6B6D00", "#6B6D00", "#515300"),
   CYAN_LED: new LedColorDef("#00FFFF", "#00FFFF", "#1BC3C3", "#00FFFF", "#083B3B", "#083B3B", "#052727"),
   MAGENTA_LED: new LedColorDef("#D300FF", "#D300FF", "#8600CB", "#C300FF", "#38004B", "#38004B", "#280035"),
-}
+};

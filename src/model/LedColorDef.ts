@@ -8,10 +8,12 @@ export class LedColorDef {
   outerColor_OFF: string;
 
   constructor(
-    innerColor1_ON: string, innerColor2_ON: string,
+    innerColor1_ON: string,
+    innerColor2_ON: string,
     outerColor_ON: string,
     coronaColor: string,
-    innerColor1_OFF: string, innerColor2_OFF: string,
+    innerColor1_OFF: string,
+    innerColor2_OFF: string,
     outerColor_OFF: string
   ) {
     this.innerColor1_ON = innerColor1_ON;
